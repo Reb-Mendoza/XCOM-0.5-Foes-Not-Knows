@@ -3,16 +3,26 @@
   <head>
     <title>XCOM 0.5: Foes Not Knows</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="js/aframe-extras.js"></script>
+    <script>
+      AFRAME.registerComponent("change-animation",{
+        soldierRunning.setAttribute("animation-mixer",)
+
+      });
+    </script>
   </head>
   <body>
     <a-scene>
       <a-assets>
         <a-asset-item id="soldierRunning" src="3D Models/soldier_ue4_rig/scene.gltf"></a-asset-item>
       </a-assets>
+      <a-camera> 
+        <a-cursor></a-cursor>
+      </a-camera>
 
       <a-box color="red" position="5 5 5"></a-box>
       
-      <a-entity gltf-model="#soldierRunning"></a-entity>
+      <a-entity gltf-model="#soldierRunning" animation-mixer="clip:run_front"></a-entity>
     </a-scene>
   </body>
 </html>
