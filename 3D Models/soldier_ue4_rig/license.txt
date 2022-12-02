@@ -1,0 +1,11 @@
+Model Information:
+* title:	Soldier, UE4 rig
+* source:	https://sketchfab.com/3d-models/soldier-ue4-rig-a823a946db94409b81f2fdf7781c8a51
+* author:	samuel.brunner (https://sketchfab.com/samuel.brunner)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Soldier, UE4 rig" (https://sketchfab.com/3d-models/soldier-ue4-rig-a823a946db94409b81f2fdf7781c8a51) by samuel.brunner (https://sketchfab.com/samuel.brunner) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

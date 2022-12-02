@@ -1,0 +1,11 @@
+Model Information:
+* title:	Soldier, blender rigged
+* source:	https://sketchfab.com/3d-models/soldier-blender-rigged-89049b924243477aabff7d85dba06c48
+* author:	samuel.brunner (https://sketchfab.com/samuel.brunner)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Soldier, blender rigged" (https://sketchfab.com/3d-models/soldier-blender-rigged-89049b924243477aabff7d85dba06c48) by samuel.brunner (https://sketchfab.com/samuel.brunner) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

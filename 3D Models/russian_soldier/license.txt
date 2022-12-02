@@ -1,0 +1,11 @@
+Model Information:
+* title:	russian_soldier
+* source:	https://sketchfab.com/3d-models/russian-soldier-3e413ff244544e59b4a3ff13cac0f69d
+* author:	samuel.brunner (https://sketchfab.com/samuel.brunner)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "russian_soldier" (https://sketchfab.com/3d-models/russian-soldier-3e413ff244544e59b4a3ff13cac0f69d) by samuel.brunner (https://sketchfab.com/samuel.brunner) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
