@@ -15,7 +15,8 @@
 4. For this same reason, every time you import a script, test it.
 
 #### 12/3/22
-1. Searched up 2D assets online that I could use for the 3D portion of the game, I have realized that the HUD and most of the UI will need to be 2D, and as its the most important part of the game, I will begin working on that.
+1. Searched up 2D assets online that I could use for the 3D portion of the game, i.e., wall and floor textures.
+2. I have realized that the HUD and most of the UI will need to be 2D, and as its the most important part of the game, I will begin working on that.
 
 #### 12/4/22
 1. Mostly took a break.
