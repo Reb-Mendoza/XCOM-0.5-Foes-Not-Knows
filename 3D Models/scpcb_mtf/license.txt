@@ -1,0 +1,11 @@
+Model Information:
+* title:	SCP:CB MTF
+* source:	https://sketchfab.com/3d-models/scpcb-mtf-0202975df86f4c88a654516e464c245f
+* author:	ThatJamGuy (https://sketchfab.com/EComputer)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "SCP:CB MTF" (https://sketchfab.com/3d-models/scpcb-mtf-0202975df86f4c88a654516e464c245f) by ThatJamGuy (https://sketchfab.com/EComputer) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
