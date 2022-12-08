@@ -21,3 +21,18 @@
 #### 12/4/22
 1. Mostly took a break.
 2. During that break, I thought up ways the core game can work. What makes weapons different from one another? How to the enemies behave? Is it possible to implement a basic AI? Maybe the strategy is more fun if the enemies have a set pattern, and are more powerful to compensate for their stupidity.
+
+#### 12/5/22
+1. Added HUD elements.
+2. Figured it would be easiest to add a blank rectangular plane first for a textbox; it can be a stylized image later, if there's time.
+
+#### 12/6/22
+1. Began coding the game itself.
+2. This included getting together variables that I would need to have the game function.
+3. Not sure if I will have time to implement a menu, so for now I am just going to try to get something playable.
+4. My eventual plan is to have 3 military operators in the player's control at once, but for now I am going to try to get just one.
+
+#### 12/7/22
+1. I spent 14 hours getting the full sight system to work. I have a series of massive functions that allow me to check whether or not two tiles have line of sight within eachother.
+
+#### 12/8/22
