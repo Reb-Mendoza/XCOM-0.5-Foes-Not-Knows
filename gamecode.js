@@ -1,8 +1,8 @@
 let turnStep = 0;
-let operator = {ID: [1], HP: [], X: [2], Y: [3]};
+let operator = {ID: [], HP: [], X: [], Y: []};
 let alien = {ID: [], HP: [], X: [], Y: []};
 //Vertical walls are described by the coordinate to the left of the wall. Horizontal walls are described by the coordinate below the wall.
-let wall = {vertical: {X: [], Y:[]}, horizontal: {X: [], Y:[]}};
+let wall = {vertical: {X: [4], Y:[3]}, horizontal: {X: [], Y:[]}};
 let smoke = {X: [], Y:[]};
 
 
@@ -53,15 +53,15 @@ function checkTile(x,y,type) {
 //Returns whether or not there is a wall on a tile, given a position and a direction. Output: Boolean
 function checkIfWall(x,y,direction) {
     if (direction == "vertical") {
-        for (i=0; i < wall.vertical.X; i++) {
-            if ((wall.vertical.X[i] == x) && (wall.vertical.Y[i] == y)) {
+        for (k=0; k < wall.vertical.X; k++) {
+            if ((wall.vertical.X[k] == x) && (wall.vertical.Y[k] == y)) {
                 return true;
             }
         }
         return false;
     } else if (direction == "horizontal") {
-        for (i=0; i < wall.horizontal.X; i++) {
-            if ((wall.horizontal.X[i] == x) && (wall.horizontal.Y[i] == y)) {
+        for (k=0; k < wall.horizontal.X; k++) {
+            if ((wall.horizontal.X[k] == x) && (wall.horizontal.Y[k] == y)) {
                 return true;
             }
         }
@@ -83,7 +83,6 @@ function canHit(x,y,targetX,targetY,range) {
 //Returns whether or not there is a line of sight between two points given an initial position, a target position, and a sight range. Output: Boolean
 //This differs from canHit in that it considers how walls and smoke block vision between those two points.
 function canSee(x,y,targetX,targetY,range) {
-    let hit = true;
     if (canHit(x,y,targetX,targetY,range) == true) {
         //Corner case.
         if ((dist(x,targetX) == 1) && (dist(y,targetY) == 1)) {
@@ -100,57 +99,83 @@ function canSee(x,y,targetX,targetY,range) {
             if ((checkIfWall((x+verticalVar),(y+((horizontalVar*2)+1)),"vertical")) == true) {
                 verticalCheck = false;
             }
-            if ((checkIfWall((x+((horizontalVar*2)+1)),(y+horizontalVar),"horizontal")) == true) {
+            if ((checkIfWall((x+((verticalVar*2)+1)),(y+horizontalVar),"horizontal")) == true) {
                 horizontalCheck = false;
             }
             if ((horizontalCheck == false) && (verticalCheck == false)) {
-                hit = false;
+                return false;
             }
         //Straight line case.
         } else if ((x == targetX) || (y == targetY)) {
             if (x == targetX) {
                 if (y < targetY) {
+                    console.log("for")
                     for (i=0; i < dist(y,targetY); i++) {
-                        if (checkIfWall(x,y+i) == true) {
-                            hit = false;
+                        if (checkIfWall(x,y+j,"horizontal")) {
+                            return false;
                         }
                     }
                 }
                 if (y > targetY) {
                     for (i=0; i < dist(y,targetY); i++) {
-                        if (checkIfWall(x,) == true) {
-                            hit = false;
+                        if (checkIfWall(x,y-(i+1),"horizontal") == true) {
+                            return false;
                         }
                     }
                 }
+                return true;
             } else if (y == targetY) {
-                for (i=0; i < wall.vertical.Y; i++) {
-                    if ((wall.vertical.Y[i]) == y) {
-                        if (((x < targetX) && ((wall.vertical.X[i]) >= x) && ((wall.vertical.X[i]) < targetX)) || ((x > targetX) && ((wall.vertical.X[i]) < x) && ((wall.vertical.X[i]) >= targetX))) {
-                            hit = false;
+                if (x < targetX) {
+                    for (i=0; i < dist(x,targetX); i++) {
+                        if (checkIfWall(x+i,y,"vertical") == true) {
+                            return false;
                         }
                     }
                 }
+                if (x > targetX) {
+                    for (i=0; i < dist(x,targetX); i++) {
+                        if (checkIfWall(x-(i+1),y,"vertical") == true) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
             }
         //Skewed shot case.
         } else {
-            var varVertical = 0;
-            var varHorizontal = 0;
-            if (dist(x,targetX) > 1) {
-                if (y < targetY) {
-                    varVertical = 1;
-                } else if (y > targetY) {
-                    varVertical = -1;
-                    varHorizontal = -1;
-                }
-                if (x < targetX) {
-                    for (i=0; i < dist(x,targetX); i++) {
-                        if ()
+            var verticalVar = 0;
+            var horizontalVar = 0;
+            var index = 0;
+            if (x > targetX) {
+                verticalVar = -1;
+            }
+            if (y > targetY) {
+                horizontalVar = -1;
+            }
+            if (dist(x,targetX) == 1) {
+                for (j=1; j < dist(y,targetY); j++) {
+                    if (y > targetY) {
+                        index = j * -1;
+                    } else {
+                        index = j;
                     }
-                } else if (x > targetX) {
-
+                    if ((canSee(x,y,x,targetY-index,(targetY-index-y)) == true) && ((checkIfWall((x+verticalVar),(targetY-index),"vertical")) == false) && (canSee((x+((verticalVar*2)+1)),(targetY-index),targetX,targetY,(index)))) {
+                        return true;
+                    }
                 }
-                
+                return false;
+            } else if (dist(y,targetY) == 1) {
+                for (j=1; j < dist(x,targetX); j++) {
+                    if (x > targetX) {
+                        index = j * -1;
+                    } else {
+                        index = j;
+                    }
+                    if ((canSee(x,y,targetX-index,y,(targetX-index-x)) == true) && ((checkIfWall((targetX-index),(y+horizontalVar),"horizontal")) == false) && (canSee((targetX-index),(y+((horizontalVar*2)+1)),targetX,targetY,(index)))) {
+                        return true;
+                    }
+                }
+                return false;
             }
         }
     } else {
@@ -158,6 +183,7 @@ function canSee(x,y,targetX,targetY,range) {
     }
 }
 
+console.log(canSee(1,1,5,2,10));
 //This function is called when a unit is meant to be killed. If it's an alien, it is removed from the game. If it's an operator, they enter a DBNO state.
 function kill(x,y) {
     
