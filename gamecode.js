@@ -264,9 +264,5 @@ function toHit(x,y,targetX,targetY,weapon) {
     
 }
 
-//
-devBox.addEventListener("click", hide);
-
-function hide() {
-    devBox.setAttribute("visible",false);
-}
+var element = document.querySelector('a-scene');
+console.log(element.querySelector('#devBox'));

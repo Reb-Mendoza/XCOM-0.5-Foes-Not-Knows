@@ -22,14 +22,15 @@
         <a-asset-item id="soldierSalutingModel" src="3D Models/soldier_blender_rigged/scene.gltf"></a-asset-item>
       </a-assets>
 
-      <a-camera> 
-        <a-cursor rayOrigin="mouse"></a-cursor>
+      <a-camera>
         <a-plane id="hudBox" color="#1ce9d1" opacity="0.5" height= "0.05" width = "0.15" position="0 -0.07 -0.12" rotation="0 0 0">
           <a-text id="hudText" color="white" height= "0.05" width = "0.14" position="-0.07 0.02 0" rotation="0 0 0" anchor="left" baseline="top" wrap-count="65" font="exo2semibold" value="Hold Angle [Short Action] :: Character enters a state in which they will fire at the next enemy that comes into line of sight."></a-text>
         </a-plane>
       </a-camera>
 
-      <a-box id= "devBox" color="red" position="5 1 5"></a-box>
+
+
+      <a-box id="devBox" color="red" position="5 1 5"></a-box>
       <a-cylinder id="devFloor" src="#devFloorTexture" radius="50" height="0.1"></a-cylinder>
       <a-sky id="devSky" src="#devSkyTexture"></a-sky>
       
