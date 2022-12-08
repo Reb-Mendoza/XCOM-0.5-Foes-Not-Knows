@@ -264,11 +264,26 @@ function toHit(x,y,targetX,targetY,weapon) {
     
 }
 
-AFRAME.registerComponent("clickable", {
+AFRAME.registerComponent("hudButton", {
     init: function () {
         this.el.addEventListener("click", function() {
-            this.setAttribute("visible",false);
-            console.log("Clicked!");
+
+        });
+    }
+});
+
+AFRAME.registerComponent("operator", {
+    init: function () {
+        this.el.addEventListener("click", function() {
+
+        });
+    }
+});
+
+AFRAME.registerComponent("alien", {
+    init: function () {
+        this.el.addEventListener("click", function() {
+
         });
     }
 });
