@@ -264,5 +264,11 @@ function toHit(x,y,targetX,targetY,weapon) {
     
 }
 
-var element = document.querySelector('a-scene');
-console.log(element.querySelector('#devBox'));
+AFRAME.registerComponent("clickable", {
+    init: function () {
+        this.el.addEventListener("click", function() {
+            this.setAttribute("visible",false);
+            console.log("Clicked!");
+        });
+    }
+});
