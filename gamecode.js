@@ -1,6 +1,6 @@
 let turnStep = 0;
-let operator = {ID: [], HP: [], X: [], Y: []};
-let alien = {ID: [], HP: [], X: [], Y: []};
+let operator = {ID: [], MaxHP: [], HP: [], X: [], Y: []};
+let alien = {ID: [], MaxHP: [], HP: [], X: [], Y: []};
 //Vertical walls are described by the coordinate to the left of the wall. Horizontal walls are described by the coordinate below the wall.
 let wall = {vertical: {X: [4], Y:[3]}, horizontal: {X: [], Y:[]}};
 let smoke = {X: [], Y:[]};
@@ -19,17 +19,17 @@ function dist(x,targetX) {
     return abs(targetX - x);
 }
 
-//Returns what team or what unit ID is on a given tile. Output: String
+//Returns what team or what unit index is on a given tile. Output: String
 function checkTile(x,y,type) {
     var faction
-    var ID
+    var index
     for (i=0; i < operator.X.length; i++) {
         checkX = (operator.X[i]);
         for (j=0; j < operator.Y.length; j++) {
             checkY = (operator.Y[j]);
             if (checkX == x && checkY == y) {
                 faction = "operator";
-                ID = j+1;
+                index = j;
             }
         }
     }
@@ -39,14 +39,14 @@ function checkTile(x,y,type) {
             checkY = (alien.Y[j]);
             if (checkX == x && checkY == y) {
                 faction = "operator";
-                ID = j+1;
+                index = j;
             }
         }
     }
     if (type == "faction") {
         return faction;
-    } else if (type == "ID") {
-        return ID;
+    } else if (type == "index") {
+        return index;
     }
 }
 
@@ -183,8 +183,90 @@ function canSee(x,y,targetX,targetY,range) {
     }
 }
 
-console.log(canSee(1,1,5,2,10));
-//This function is called when a unit is meant to be killed. If it's an alien, it is removed from the game. If it's an operator, they enter a DBNO state.
+//This function is called when a unit is meant to be killed. If it's an alien, it is removed from the game. If it's an operator, they enter a DBNO state. Output: N/A
 function kill(x,y) {
+    var index = (checkTile(x,y,"index"));
+    if (checkTile(x,y,"faction") == "operator") {
+
+    } else if (checkTile(x,y,"faction") == "alien") {
+        alien.HP.splice(index,1)
+        alien.X.splice(index,1)
+        alien.Y.splice(index,1)
+    }
+
+}
+
+//Reduce the HP stat of a unit by a specified amount. If its HP reaches below 1, kill it. Output: N/A
+function damage(x,y,amount) {
+    var index = (checkTile(x,y,"index"));
+    var newHP;
+    if (checkTile(x,y,"faction") == "operator") {
+        operator.HP[index] = operator.HP[index] - amount;
+        newHP = operator.HP[index];
+    } else if (checkTile(x,y,"faction") == "alien") {
+        alien.HP[index] = alien.HP[index] - amount;
+        newHP = alien.HP[index];
+    }
+    if (newHP < 1) {
+        kill(x,y);
+    }
+}
+
+//Increase the HP stat of a unit by a specified amount, up to a cap. Output: N/A
+function heal(x,y,amount) {
+    var index = (checkTile(x,y,"index"));
+    if (checkTile(x,y,"faction") == "operator") {
+        if ((operator.HP[index] + amount) > operator.MaxHP[index]) {
+            amount = operator.MaxHP[index] - operator.HP[index]
+        }
+        operator.HP[index] = operator.HP[index] + amount;
+    } else if (checkTile(x,y,"faction") == "alien") {
+        if ((alien.HP[index] + amount) > alien.MaxHP[index]) {
+            amount = alien.MaxHP[index] - alien.HP[index]
+        }
+        alien.HP[index] = alien.HP[index] + amount;
+    }
+}
+
+//Move a unit one space in a given direction. Output: N/A
+function move(x,y,direction) {
+    var index = checkTile(x,y,"index");
+    var faction = checkTile(x,y,"faction");
+    if (direction == "up") {
+        if (faction == "operator") {
+            operator.Y[index] = operator.Y[index] + 1;
+        } else if (faction == "alien") {
+            alien.Y[index] = alien.Y[index] + 1;
+        }
+    } else if (direction == "down") {
+        if (faction == "operator") {
+            operator.Y[index] = operator.Y[index] - 1;
+        } else if (faction == "alien") {
+            alien.Y[index] = alien.Y[index] - 1;
+        }
+    } else if (direction == "left") {
+        if (faction == "operator") {
+            operator.X[index] = operator.X[index] - 1;
+        } else if (faction == "alien") {
+            alien.X[index] = alien.X[index] - 1;
+        }
+    } else if (direction == "right") {
+        if (faction == "operator") {
+            operator.X[index] = operator.X[index] + 1;
+        } else if (faction == "alien") {
+            alien.X[index] = alien.X[index] + 1;
+        }
+    }
+}
+
+//Check whether or not a shot that has been fired hits. Output: Boolean
+function toHit(x,y,targetX,targetY,weapon) {
     
+}
+
+//
+devBox.addEventListener("click", hide);
+
+function hide() {
+    devBox.setAttribute("visible",false);
 }
