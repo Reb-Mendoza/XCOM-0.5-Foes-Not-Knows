@@ -24,7 +24,7 @@
 
       <a-camera> 
         <a-plane id="hudBox" color="#1ce9d1" opacity="0.5" height= "0.05" width = "0.15" position="0 -0.07 -0.12" rotation="0 0 0">
-          <a-text id="hudText" color="white" height= "0.05" width = "0.14" position="-0.07 0.02 0" rotation="0 0 0" anchor="left" baseline="top" wrap-count="65" font="exo2semibold" value="Overwatch [Short Action] :: Character enters a state in which they will fire at the next enemy that comes into line of sight."></a-text>
+          <a-text id="hudText" color="white" height= "0.05" width = "0.14" position="-0.07 0.02 0" rotation="0 0 0" anchor="left" baseline="top" wrap-count="65" font="exo2semibold" value="Hold Angle [Short Action] :: Character enters a state in which they will fire at the next enemy that comes into line of sight."></a-text>
         </a-plane>
       </a-camera>
 
@@ -32,9 +32,9 @@
       <a-cylinder id="devFloor" src="#devFloorTexture" radius="50" height="0.1"></a-cylinder>
       <a-sky id="devSky" src="#devSkyTexture"></a-sky>
       
-      <a-entity gltf-model="#soldierRunningModel" position="0 1 0" animation-mixer="clip: root|run_front"></a-entity>
-      <a-entity gltf-model="#soldierShootingModel" position="5 1 0"></a-entity>
-      <a-entity gltf-model="#soldierSalutingModel" position="10 1 0"></a-entity>
+      <a-entity gltf-model="#soldierRunningModel" position="0 2 0" animation-mixer="clip: root|run_front"></a-entity>
+      <a-entity gltf-model="#soldierShootingModel" position="5 2 0"></a-entity>
+      <a-entity gltf-model="#soldierSalutingModel" position="10 2 0"></a-entity>
     </a-scene>
   </body>
 </html>
