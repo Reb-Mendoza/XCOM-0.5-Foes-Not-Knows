@@ -274,7 +274,7 @@ function action(buttonNumber) {
 
 //Create hud buttons.
 function showButtons() {
-    var sceneEl = document.querySelector("a-camera");
+    var sceneEl = document.querySelector("a-scene");
     var entityEl = document.createElement("a-entity");
     entityEl.setAttribute(mixin, "abilityButton");
     sceneEl.appendChild(entityEl);
