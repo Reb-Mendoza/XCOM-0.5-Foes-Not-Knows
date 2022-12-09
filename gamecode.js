@@ -186,7 +186,7 @@ function canSee(x,y,targetX,targetY,range) {
     }
 }
 
-//This function is called when a unit is meant to be killed. If it's an alien, it is removed from the game. If it's an operator, they enter a DBNO state. Output: N/A
+//This function is called when a unit is meant to be killed. If it's an alien, it is removed from the game. If it's an operator, they enter a DBNO state.
 function kill(x,y) {
     var index = (checkTile(x,y,"index"));
     if (checkTile(x,y,"faction") == "operator") {
@@ -199,7 +199,7 @@ function kill(x,y) {
 
 }
 
-//Reduce the HP stat of a unit by a specified amount. If its HP reaches below 1, kill it. Output: N/A
+//Reduce the HP stat of a unit by a specified amount. If its HP reaches below 1, kill it.
 function damage(x,y,amount) {
     var index = (checkTile(x,y,"index"));
     var newHP;
@@ -215,7 +215,7 @@ function damage(x,y,amount) {
     }
 }
 
-//Increase the HP stat of a unit by a specified amount, up to a cap. Output: N/A
+//Increase the HP stat of a unit by a specified amount, up to a cap.
 function heal(x,y,amount) {
     var index = (checkTile(x,y,"index"));
     if (checkTile(x,y,"faction") == "operator") {
@@ -231,7 +231,7 @@ function heal(x,y,amount) {
     }
 }
 
-//Move a unit one space in a given direction. Output: N/A
+//Move a unit one space in a given direction.
 function move(x,y,direction) {
     var index = checkTile(x,y,"index");
     var faction = checkTile(x,y,"faction");
@@ -271,6 +271,23 @@ function toHit(x,y,targetX,targetY,weapon) {
 function action(buttonNumber) {
 
 }
+
+//Create hud buttons.
+function showButtons() {
+    var sceneEl = document.querySelector("a-camera");
+    var entityEl = document.createElement("a-entity");
+    entityEl.setAttribute(mixin, "abilityButton");
+    sceneEl.appendChild(entityEl);
+}
+
+AFRAME.registerComponent("controls", {
+    init: function () {
+        this.el.addEventListener("keydown", function() {
+            console.log("key pressed!");
+            showButtons();
+        });
+    }
+});
 
 AFRAME.registerComponent("abilityButton", {
     init: function () {
