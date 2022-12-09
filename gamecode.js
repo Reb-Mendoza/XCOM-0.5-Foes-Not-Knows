@@ -276,8 +276,8 @@ function action(buttonNumber) {
 function showButtons() {
     var sceneEl = document.querySelector("a-scene");
     var entityEl = document.createElement("a-entity");
-    entityEl.setAttribute(mixin, "abilityButton");
     sceneEl.appendChild(entityEl);
+    entityEl.setAttribute(mixin, "abilityButton");
 }
 
 AFRAME.registerComponent("controls", {
