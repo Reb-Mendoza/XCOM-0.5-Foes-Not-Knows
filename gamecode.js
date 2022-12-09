@@ -1,9 +1,12 @@
 let turnStep = 0;
+let abilityButtonCount = 0;
 let operator = {ID: [], MaxHP: [], HP: [], X: [], Y: []};
 let alien = {ID: [], MaxHP: [], HP: [], X: [], Y: []};
 //Vertical walls are described by the coordinate to the left of the wall. Horizontal walls are described by the coordinate below the wall.
 let wall = {vertical: {X: [4], Y:[3]}, horizontal: {X: [], Y:[]}};
 let smoke = {X: [], Y:[]};
+
+let buttonNumberID = [];
 
 
 //Returns the absolute value of a number input. Output: Number
@@ -264,10 +267,19 @@ function toHit(x,y,targetX,targetY,weapon) {
     
 }
 
-AFRAME.registerComponent("hudButton", {
-    init: function () {
-        this.el.addEventListener("click", function() {
+//Check what action is tied to which button in the HUD, then call that action to be performed.
+function action(buttonNumber) {
 
+}
+
+AFRAME.registerComponent("abilityButton", {
+    init: function () {
+        abilityButtonCount = abilityButtonCount + 1;
+        horizontalOffset= 0.015 * (abilityButtonCount-1);
+        var buttonNumber = abilityButtonCount;
+        this.el.setAttribute("position",String(horizontalOffset - 0.065) + " -0.055" + " 0.119")
+        this.el.addEventListener("click", function() {
+            action(buttonNumber);
         });
     }
 });
