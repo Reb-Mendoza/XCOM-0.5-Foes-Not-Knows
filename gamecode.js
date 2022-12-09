@@ -267,6 +267,11 @@ function toHit(x,y,targetX,targetY,weapon) {
     
 }
 
+//Check what type of unit has been selected. If it's an operator, show its controls. If it's an alien, show its description, ONLY if it had line of sight.
+function selectUnit(x,y) {
+
+}
+
 //Check what action is tied to which button in the HUD, then call that action to be performed.
 function action(buttonNumber) {
 
@@ -275,9 +280,9 @@ function action(buttonNumber) {
 //Create hud buttons.
 function showButtons() {
     var sceneEl = document.querySelector("a-scene");
-    var entityEl = document.createElement("a-entity");
+    var entityEl = document.createElement("a-box");
     sceneEl.appendChild(entityEl);
-    entityEl.setAttribute(mixin, "abilityButton");
+    entityEl.setAttribute(position, "0 10 0");
 }
 
 AFRAME.registerComponent("controls", {
@@ -286,10 +291,18 @@ AFRAME.registerComponent("controls", {
             console.log("R pressed!");
             showButtons();
         });
+        this.el.addEventListener("keydown:KeyR", function() {
+            console.log("R pressed!");
+            showButtons();
+        });
+        this.el.addEventListener("keydown:KeyR", function() {
+            console.log("R pressed!");
+            showButtons();
+        });
     }
 });
 
-AFRAME.registerComponent("abilityButton", {
+AFRAME.registerComponent("ability-button", {
     init: function () {
         abilityButtonCount = abilityButtonCount + 1;
         horizontalOffset= 0.015 * (abilityButtonCount-1);
@@ -301,18 +314,10 @@ AFRAME.registerComponent("abilityButton", {
     }
 });
 
-AFRAME.registerComponent("operator", {
+AFRAME.registerComponent("unit", {
     init: function () {
         this.el.addEventListener("click", function() {
-
-        });
-    }
-});
-
-AFRAME.registerComponent("alien", {
-    init: function () {
-        this.el.addEventListener("click", function() {
-
+            selectUnit(x,y);
         });
     }
 });
