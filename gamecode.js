@@ -282,8 +282,8 @@ function showButtons() {
 
 AFRAME.registerComponent("controls", {
     init: function () {
-        this.el.addEventListener("keydown", function() {
-            console.log("key pressed!");
+        this.el.addEventListener("keydown:KeyR", function() {
+            console.log("R pressed!");
             showButtons();
         });
     }
