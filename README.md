@@ -36,3 +36,28 @@
 1. I spent 14 hours getting the full sight system to work. I have a series of massive functions that allow me to check whether or not two tiles have line of sight within eachother.
 
 #### 12/8/22
+1. Learned more about A-frame, and exactly how it works.
+2. Worked on visual things, like the actual battlefield.
+
+#### 12/9/22
+1. Took a break, but make a framework for what work is to come.
+2. Made a realization that if I'm going to finish this project, I'd have to really get to work this next week.
+3. Managed to get keyboard controls to respond.
+4. Tomorrow I will hopefully be able to map every key I want to have mapped. WASD Camera Movement, 1-6 for unit actions, ESC for pause.
+
+#### 12/10/22
+1. Slacked off for half the day, but the night will go crazy.
+2. 
+
+
+
+
+
+
+
+
+
+
+
+
+
