@@ -40,7 +40,7 @@
 2. Worked on visual things, like the actual battlefield.
 
 #### 12/9/22
-1. Took a break, but make a framework for what work is to come.
+1. Took a break, but made a framework for what work is to come.
 2. Made a realization that if I'm going to finish this project, I'd have to really get to work this next week.
 3. Managed to get keyboard controls to respond.
 4. Tomorrow I will hopefully be able to map every key I want to have mapped. WASD Camera Movement, 1-6 for unit actions, ESC for pause.
