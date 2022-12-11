@@ -47,6 +47,10 @@
 
 #### 12/10/22
 1. Slacked off for half the day, but the night will go crazy.
+2. Did work on key mapping and the logic of controlling the game as a whole.
+
+#### 12/11/22
+1. Big day. Time to grind out this thing for hours.
 2. 
 
 
