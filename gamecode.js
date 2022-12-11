@@ -1,8 +1,10 @@
 let turnStep = 0;
 let abilityButtonCount = 0;
 let unitIDSelected = 0;
-let operator = {ID: [], MaxHP: [], HP: [], X: [], Y: []};
-let alien = {ID: [], MaxHP: [], HP: [], X: [], Y: []};
+let operator = {ID: [], MaxAP: [], AP: [], MaxHP: [], HP: [], X: [], Y: []};
+let alien = {ID: [], MaxAP: [], AP: [], MaxHP: [], HP: [], X: [], Y: []};
+let buttonsPressable = 0;
+let controlMode = 0;
 //Vertical walls are described by the coordinate to the left of the wall. Horizontal walls are described by the coordinate below the wall.
 let wall = {vertical: {X: [4], Y:[3]}, horizontal: {X: [], Y:[]}};
 let smoke = {X: [], Y:[]};
@@ -272,23 +274,25 @@ function toHit(x,y,targetX,targetY,weapon) {
 function selectUnit(x,y) {
     if (checkTile(x,y,"faction") == "operator") {
         unitIDSelected = operator.ID(checkTile(x,y,"index"));
+        showButtons();
     } else if (checkTile(x,y,"faction") == "alien") {
         unitIDSelected = alien.ID(checkTile(x,y,"index"));
+        hideButtons();
     }
     //Ashe
     if (unitIDSelected == 1) {
 
     //Thermite
-    } else if (unitIDSelected == 1) {
+    } else if (unitIDSelected == 0) {
         
     //Montagne
-    } else if (unitIDSelected == 1) {
+    } else if (unitIDSelected == 0) {
         
     //Glaz
-    } else if (unitIDSelected == 1) {
+    } else if (unitIDSelected == 0) {
         
     //Doc
-    } else if (unitIDSelected == 1) {
+    } else if (unitIDSelected == 0) {
         
     //Aliens' IDs start at 101
     //Grunt
@@ -303,42 +307,54 @@ function selectUnit(x,y) {
 //Check what action is tied to which button in the HUD, then call that action to be performed.
 function action(buttonNumber) {
     console.log("action" + toString(buttonNumber))
+    if (buttonNumber == 1) {
+        controlMode = 1;
+
+    }
 }
 
-//Create hud buttons.
+//Show HUD buttons.
 function showButtons() {
-    var sceneEl = document.querySelector("a-scene");
-    var entityEl = document.createElement("a-box");
-    sceneEl.appendChild(entityEl);
-    entityEl.setAttribute(position, "0 10 0");
+    buttonsPressable = 1;
+
+}
+
+//Hide HUD buttons.
+function hideButtons() {
+    buttonsPressable = 0;
+
 }
 
 AFRAME.registerComponent("controls", {
     init: function () {
-        this.el.addEventListener("keydown:Digit1", function() {
-            console.log("1 pressed!");
-            action(1);
-        });
-        this.el.addEventListener("keydown:Digit2", function() {
-            console.log("2 pressed!");
-            action(2);
-        });
-        this.el.addEventListener("keydown:Digit3", function() {
-            console.log("3 pressed!");
-            action(3);
-        });
-        this.el.addEventListener("keydown:Digit4", function() {
-            console.log("4 pressed!");
-            action(4);
-        });
-        this.el.addEventListener("keydown:Digit5", function() {
-            console.log("5 pressed!");
-            action(5);
-        });
-        this.el.addEventListener("keydown:Digit6", function() {
-            console.log("6 pressed!");
-            action(6);
-        });
+        if (buttonsPressable == 1) {
+            this.el.addEventListener("keydown:Digit1", function() {
+                console.log("1 pressed!");
+                action(1);
+            });
+            this.el.addEventListener("keydown:Digit2", function() {
+                console.log("2 pressed!");
+                action(2);
+            });
+            this.el.addEventListener("keydown:Digit3", function() {
+                console.log("3 pressed!");
+                action(3);
+            });
+            this.el.addEventListener("keydown:Digit4", function() {
+                console.log("4 pressed!");
+                action(4);
+            });
+            this.el.addEventListener("keydown:Digit5", function() {
+                console.log("5 pressed!");
+                action(5);
+            });
+            this.el.addEventListener("keydown:Digit6", function() {
+                console.log("6 pressed!");
+                action(6);
+            });
+        } else if (controlMode == 1) {
+            gameCamera.setAttribute(wasd-controls, 'false');
+        }
     }
 });
 
@@ -349,7 +365,9 @@ AFRAME.registerComponent("ability-button", {
     init: function () {
         var buttonNumber = el.getAttribute('number');
         this.el.addEventListener("click", function() {
-            action(buttonNumber);
+            if (buttonsPressable == 1) {
+                action(buttonNumber);
+            }
         });
     }
 });
