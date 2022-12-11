@@ -1,6 +1,7 @@
 let turnStep = 0;
 let abilityButtonCount = 0;
 let selected = {X: 0, Y: 0};
+let targeted = {X: 0, Y: 0};
 let operator = {ID: [], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let alien = {ID: [], Action: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let buttonsPressable = 0;
@@ -202,7 +203,7 @@ function kill(x,y) {
         alien.X.splice(index,1)
         alien.Y.splice(index,1)
     }
-
+    console.log("Unit Killed!");
 }
 
 //Reduce the HP stat of a unit by a specified amount. If its HP reaches below 1, kill it.
@@ -216,6 +217,7 @@ function damage(x,y,amount) {
         alien.HP[index] = alien.HP[index] - amount;
         newHP = alien.HP[index];
     }
+    console.log("Took Damage!");
     if (newHP < 1) {
         kill(x,y);
     }
@@ -270,7 +272,17 @@ function move(x,y,direction) {
 
 //Check whether or not a shot that has been fired hits. Output: Boolean
 function toHit(x,y,targetX,targetY,weapon) {
-    
+    var distance = dist(x,targetX);
+    if (dist(y,targetY) > distance) {
+        distance = dist(y,targetY);
+    }
+    if (Math.random() < 0.9) {
+        console.log("Shot Hit!");
+        return true
+    } else {
+        console.log("Shot Missed.");
+        return false
+    }
 }
 
 //Check what type of unit has been selected. If it's an operator, show its controls. If it's an alien, show its description, ONLY if it had line of sight.
@@ -283,6 +295,19 @@ function selectUnit(x,y) {
         selected.X = x
         selected.Y = y
         hideButtons();
+    }
+}
+
+//Target a unit with an ability.
+function targetUnit(x,y) {
+    if (controlMode == 2) {
+        if (checkTile(x,y,"faction") == "operator") {
+            text("Friendly fire will not be tolerated. You must target an alien.");
+        } else if (checkTile(x,y,"faction") == "alien") {
+            targeted.X = x;
+            targeted.Y = y;
+            text("Hit Chance - Sample\nDamage - Sample");
+        }
     }
 }
 
@@ -399,10 +424,10 @@ AFRAME.registerComponent("controls", {
                 controlMode = 0;
             }
         });
-        this.el.addEventListener("keydown:Escape", function() {
-            console.log("Esc pressed!");
-            if (controlMode == 1) {
-                action(6);
+        this.el.addEventListener("keydown:Space", function() {
+            console.log("Space pressed!");
+            if ((controlMode == 2) && (targeted.X != 0) && (targeted.Y != 0) && toHit(selected.X,selected.Y,targeted.X,targeted.Y,1)) {
+                damage(targeted.X,targeted.Y,5);
             }
         });
     }
@@ -431,7 +456,11 @@ AFRAME.registerComponent("unit", {
         this.el.addEventListener("click", function() {
             var xValue = el.getAttribute('x');
             var yValue = el.getAttribute('y');
-            selectUnit(xValue,yValue);
+            if (controlMode == 0) {
+                selectUnit(xValue,yValue);
+            } else if (controlMode == 2) {
+                targetUnit(xValue,yValue);
+            }
         });
     }
 });
