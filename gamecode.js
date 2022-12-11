@@ -1,5 +1,6 @@
 let turnStep = 0;
 let abilityButtonCount = 0;
+let unitIDSelected = 0;
 let operator = {ID: [], MaxHP: [], HP: [], X: [], Y: []};
 let alien = {ID: [], MaxHP: [], HP: [], X: [], Y: []};
 //Vertical walls are described by the coordinate to the left of the wall. Horizontal walls are described by the coordinate below the wall.
@@ -269,12 +270,39 @@ function toHit(x,y,targetX,targetY,weapon) {
 
 //Check what type of unit has been selected. If it's an operator, show its controls. If it's an alien, show its description, ONLY if it had line of sight.
 function selectUnit(x,y) {
+    if (checkTile(x,y,"faction") == "operator") {
+        unitIDSelected = operator.ID(checkTile(x,y,"index"));
+    } else if (checkTile(x,y,"faction") == "alien") {
+        unitIDSelected = alien.ID(checkTile(x,y,"index"));
+    }
+    //Ashe
+    if (unitIDSelected == 1) {
 
+    //Thermite
+    } else if (unitIDSelected == 1) {
+        
+    //Montagne
+    } else if (unitIDSelected == 1) {
+        
+    //Glaz
+    } else if (unitIDSelected == 1) {
+        
+    //Doc
+    } else if (unitIDSelected == 1) {
+        
+    //Aliens' IDs start at 101
+    //Grunt
+    } else if (unitIDSelected == 101) {
+        
+    //Exploder
+    } else if (unitIDSelected == 102) {
+        
+    }
 }
 
 //Check what action is tied to which button in the HUD, then call that action to be performed.
 function action(buttonNumber) {
-
+    console.log("action" + toString(buttonNumber))
 }
 
 //Create hud buttons.
@@ -287,27 +315,39 @@ function showButtons() {
 
 AFRAME.registerComponent("controls", {
     init: function () {
-        this.el.addEventListener("keydown:KeyR", function() {
-            console.log("R pressed!");
-            showButtons();
+        this.el.addEventListener("keydown:Digit1", function() {
+            console.log("1 pressed!");
+            action(1);
         });
-        this.el.addEventListener("keydown:KeyR", function() {
-            console.log("R pressed!");
-            showButtons();
+        this.el.addEventListener("keydown:Digit2", function() {
+            console.log("2 pressed!");
+            action(2);
         });
-        this.el.addEventListener("keydown:KeyR", function() {
-            console.log("R pressed!");
-            showButtons();
+        this.el.addEventListener("keydown:Digit3", function() {
+            console.log("3 pressed!");
+            action(3);
+        });
+        this.el.addEventListener("keydown:Digit4", function() {
+            console.log("4 pressed!");
+            action(4);
+        });
+        this.el.addEventListener("keydown:Digit5", function() {
+            console.log("5 pressed!");
+            action(5);
+        });
+        this.el.addEventListener("keydown:Digit6", function() {
+            console.log("6 pressed!");
+            action(6);
         });
     }
 });
 
 AFRAME.registerComponent("ability-button", {
+    schema: {
+        number: {type: 'number', default: 0}
+    },
     init: function () {
-        abilityButtonCount = abilityButtonCount + 1;
-        horizontalOffset= 0.015 * (abilityButtonCount-1);
-        var buttonNumber = abilityButtonCount;
-        this.el.setAttribute("position",String(horizontalOffset - 0.065) + " -0.055" + " 0.119")
+        var buttonNumber = el.getAttribute('number');
         this.el.addEventListener("click", function() {
             action(buttonNumber);
         });
@@ -315,9 +355,15 @@ AFRAME.registerComponent("ability-button", {
 });
 
 AFRAME.registerComponent("unit", {
+    schema: {
+        x: {type: 'number', default: 1},
+        y: {type: 'number', default: 1},
+      },
     init: function () {
+        var xValue = el.getAttribute('x');
+        var yValue = el.getAttribute('y');
         this.el.addEventListener("click", function() {
-            selectUnit(x,y);
+            selectUnit(xValue,yValue);
         });
     }
 });
