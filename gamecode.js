@@ -1,17 +1,20 @@
 let turnStep = 0;
 let abilityButtonCount = 0;
-let unitIDSelected = 0;
-let operator = {ID: [], MaxAP: [], AP: [], MaxHP: [], HP: [], X: [], Y: []};
-let alien = {ID: [], MaxAP: [], AP: [], MaxHP: [], HP: [], X: [], Y: []};
+let selected = {X: 0, Y: 0};
+let operator = {ID: [], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
+let alien = {ID: [], Action: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let buttonsPressable = 0;
 let controlMode = 0;
 //Vertical walls are described by the coordinate to the left of the wall. Horizontal walls are described by the coordinate below the wall.
 let wall = {vertical: {X: [4], Y:[3]}, horizontal: {X: [], Y:[]}};
 let smoke = {X: [], Y:[]};
 
-let buttonNumberID = [];
-
-
+//Causes the textbow in the HUD to change.
+function text(value) {
+    var HUDText = string(value);
+    var entity = document.querySelector('#hudText');
+    entity.setAttribute("value", HUDText);
+}
 //Returns the absolute value of a number input. Output: Number
 function abs(x) {
     if (x < 0) {
@@ -273,50 +276,50 @@ function toHit(x,y,targetX,targetY,weapon) {
 //Check what type of unit has been selected. If it's an operator, show its controls. If it's an alien, show its description, ONLY if it had line of sight.
 function selectUnit(x,y) {
     if (checkTile(x,y,"faction") == "operator") {
-        unitIDSelected = operator.ID(checkTile(x,y,"index"));
+        selected.X = x
+        selected.Y = y
         showButtons();
     } else if (checkTile(x,y,"faction") == "alien") {
-        unitIDSelected = alien.ID(checkTile(x,y,"index"));
+        selected.X = x
+        selected.Y = y
         hideButtons();
-    }
-    //Ashe
-    if (unitIDSelected == 1) {
-
-    //Thermite
-    } else if (unitIDSelected == 0) {
-        
-    //Montagne
-    } else if (unitIDSelected == 0) {
-        
-    //Glaz
-    } else if (unitIDSelected == 0) {
-        
-    //Doc
-    } else if (unitIDSelected == 0) {
-        
-    //Aliens' IDs start at 101
-    //Grunt
-    } else if (unitIDSelected == 101) {
-        
-    //Exploder
-    } else if (unitIDSelected == 102) {
-        
     }
 }
 
 //Check what action is tied to which button in the HUD, then call that action to be performed.
 function action(buttonNumber) {
     console.log("action" + toString(buttonNumber))
+    //Movement
     if (buttonNumber == 1) {
         controlMode = 1;
+        text("WASD - Operator moves one tile in that dierection, if possible.\nEsc - Cancel movement.");
+    //Fire Weapon
+    } else if (buttonNumber == 2) {
+        if ((operator.Action[checkTile(selected.X, selected.Y, "index")]) == 2) {
+            if ((operator.Ammo[checkTile(selected.X, selected.Y, "index")]) > 0) {
+                controlMode = 2;
+                text("Click to select a target for your operator to aim at.\nEsc - Cancel action");
+            } else {
+                text("Operator needs to reload their weapon before firing.");
+            }
+        } else {
+            text("Operator does not have enough time this turn to fire their weapon.");
+        }
+    } else if (buttonNumber == 3) {
 
-    }
+    } else if (buttonNumber == 4) {
+
+    } else if (buttonNumber == 5) {
+
+    } else if (buttonNumber == 6) {
+
+    } 
 }
 
-//Show HUD buttons.
+//Show HUD buttons. Based on which operator you've selected.
 function showButtons() {
     buttonsPressable = 1;
-
+    
 }
 
 //Hide HUD buttons.
@@ -327,34 +330,81 @@ function hideButtons() {
 
 AFRAME.registerComponent("controls", {
     init: function () {
-        if (buttonsPressable == 1) {
-            this.el.addEventListener("keydown:Digit1", function() {
-                console.log("1 pressed!");
+        //Actions
+        this.el.addEventListener("keydown:Digit1", function() {
+            console.log("1 pressed!");
+            if (buttonsPressable == 1) {
                 action(1);
-            });
-            this.el.addEventListener("keydown:Digit2", function() {
-                console.log("2 pressed!");
+            }
+        });
+        this.el.addEventListener("keydown:Digit2", function() {
+            console.log("2 pressed!");
+            if (buttonsPressable == 1) {
                 action(2);
-            });
-            this.el.addEventListener("keydown:Digit3", function() {
-                console.log("3 pressed!");
+            }
+        });
+        this.el.addEventListener("keydown:Digit3", function() {
+            console.log("3 pressed!");
+            if (buttonsPressable == 1) {
                 action(3);
-            });
-            this.el.addEventListener("keydown:Digit4", function() {
-                console.log("4 pressed!");
+            }
+        });
+        this.el.addEventListener("keydown:Digit4", function() {
+            console.log("4 pressed!");
+            if (buttonsPressable == 1) {
                 action(4);
-            });
-            this.el.addEventListener("keydown:Digit5", function() {
-                console.log("5 pressed!");
+            }
+        });
+        this.el.addEventListener("keydown:Digit5", function() {
+            console.log("5 pressed!");
+            if (buttonsPressable == 1) {
                 action(5);
-            });
-            this.el.addEventListener("keydown:Digit6", function() {
-                console.log("6 pressed!");
+            }
+        });
+        this.el.addEventListener("keydown:Digit6", function() {
+            console.log("6 pressed!");
+            if (buttonsPressable == 1) {
                 action(6);
-            });
-        } else if (controlMode == 1) {
-            gameCamera.setAttribute(wasd-controls, 'false');
-        }
+            }
+        });
+        //Movement Actions
+        this.el.addEventListener("keydown:KeyW", function() {
+            console.log("W pressed!");
+            if (controlMode == 1) {
+                move(selected.X, selected.Y, "up");
+            }
+        });
+        this.el.addEventListener("keydown:KeyA", function() {
+            console.log("A pressed!");
+            if (controlMode == 1) {
+                move(selected.X, selected.Y, "left");
+            }
+        });
+        this.el.addEventListener("keydown:KeyS", function() {
+            console.log("S pressed!");
+            if (controlMode == 1) {
+                move(selected.X, selected.Y, "down");
+            }
+        });
+        this.el.addEventListener("keydown:KeyD", function() {
+            console.log("D pressed!");
+            if (controlMode == 1) {
+                move(selected.X, selected.Y, "right");
+            }
+        });
+        //Other
+        this.el.addEventListener("keydown:Escape", function() {
+            console.log("Esc pressed!");
+            if (controlMode != 0) {
+                controlMode = 0;
+            }
+        });
+        this.el.addEventListener("keydown:Escape", function() {
+            console.log("Esc pressed!");
+            if (controlMode == 1) {
+                action(6);
+            }
+        });
     }
 });
 
@@ -378,9 +428,9 @@ AFRAME.registerComponent("unit", {
         y: {type: 'number', default: 1},
       },
     init: function () {
-        var xValue = el.getAttribute('x');
-        var yValue = el.getAttribute('y');
         this.el.addEventListener("click", function() {
+            var xValue = el.getAttribute('x');
+            var yValue = el.getAttribute('y');
             selectUnit(xValue,yValue);
         });
     }
