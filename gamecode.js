@@ -479,6 +479,7 @@ AFRAME.registerComponent("unit", {
       },
     init: function () {
         this.el.addEventListener("click", function() {
+            console.log("I was clicked!");
             var xValue = el.getAttribute('x');
             var yValue = el.getAttribute('y');
             if (controlMode == 0) {
