@@ -27,6 +27,24 @@ function abs(x) {
 function dist(x,targetX) {
     return abs(targetX - x);
 }
+//Creates a wall on a given position and direction. 
+function createWall(x,y,direction) {
+    var xValue = x * -2;
+    var zValue = y * 2;
+    var degrees = 0;
+    var sceneEl = document.querySelector("a-scene");
+    var entityEl = document.createElement("a-entity");
+    sceneEl.appendChild(entityEl);
+    if (direction == "vertical") {
+        xValue = xValue + 1;
+    } else if (direction == "horizontal") {
+        zValue = zValue + 1;
+        degrees = 90;
+    }
+    entityEl.setAttribute("mixin", "hardWall");
+    entityEl.object3D.position.set(xValue, 0, zValue);
+    entityEl.object3D.rotation.y = THREE.Math.degToRad(degrees);
+}
 //Returns what team or what unit index is on a given tile. Output: String
 function checkTile(x,y,type) {
     var faction
@@ -71,7 +89,7 @@ function checkIfWall(x,y,direction) {
             if ((wall.horizontal.X[k] == x) && (wall.horizontal.Y[k] == y)) {
                 return true;
             }
-        }
+z       }
         return false;
     }
 }
@@ -243,31 +261,31 @@ function move(x,y,direction) {
     if ((direction == "up") && !(checkIfWall(x,y,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] + 1;
-            element.setAttribute("position", "y: " + operator.Y[index].toString())
         } else if (faction == "alien") {
             alien.Y[index] = alien.Y[index] + 1;
         }
+        element.object3D.position.z += 2
     } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] - 1;
-            element.setAttribute("position", "y: " + operator.Y[index].toString())
         } else if (faction == "alien") {
             alien.Y[index] = alien.Y[index] - 1;
         }
+        element.object3D.position.z += -2
     } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] - 1;
-            element.setAttribute("position", "x: " + operator.X[index].toString())
         } else if (faction == "alien") {
             alien.X[index] = alien.X[index] - 1;
         }
+        element.object3D.position.x += 2
     } else if ((direction == "right") && !(checkIfWall(x,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] + 1;
-            element.setAttribute("position", "x: " + operator.X[index].toString()) //CREATE A FUNCTION THAT CONVERTS THE 2D COORDINATE SYSTEM TO THE 3D ONE
         } else if (faction == "alien") {
             alien.X[index] = alien.X[index] + 1;
         }
+        element.object3D.position.x += -2
     }
 }
 //Check whether or not a shot that has been fired hits. Output: Boolean
@@ -286,11 +304,17 @@ function toHit(x,y,targetX,targetY,weapon) {
 }
 //Check what type of unit has been selected. If it's an operator, show its controls. If it's an alien, show its description, ONLY if it had line of sight.
 function selectUnit(x,y) {
+    var sceneEl = document.querySelector("a-scene");
+    var entityEl = document.createElement("a-entity");
+    sceneEl.appendChild(entityEl);
+    entityEl.setAttribute("mixin", "hardWall");
     if (checkTile(x,y,"faction") == "operator") {
+        entityEl.setAttribute("color", "green");
         selected.X = x
         selected.Y = y
         showButtons();
     } else if (checkTile(x,y,"faction") == "alien") {
+        entityEl.setAttribute("color", "red");
         selected.X = x
         selected.Y = y
         hideButtons();
