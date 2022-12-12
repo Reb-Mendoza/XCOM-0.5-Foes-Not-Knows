@@ -12,12 +12,15 @@
       <a-assets>
         <img id="devFloorTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
         <img id="devSkyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
-
-        <a-mixin id="abilityButton" ability-button geometry="primitive: plane; width: 0.01; height: 0.01" color="black" rotation="0 0 0" visible="false"></a-mixin>
+        <img id="hardWallTexture" src="Textures/walls/IMGP1648.JPG">
+        <img id="floorTexture" src="Textures/textile/IMGP0505.JPG">
 
         <a-asset-item id="soldierRunningModel" src="3D Models/soldier_ue4_rig/scene.gltf"></a-asset-item>
         <a-asset-item id="soldierShootingModel" src="3D Models/russian_soldier/scene.gltf"></a-asset-item>
         <a-asset-item id="soldierSalutingModel" src="3D Models/soldier_blender_rigged/scene.gltf"></a-asset-item>
+
+        <a-mixin id="abilityButton" ability-button geometry="primitive: plane; width: 0.01; height: 0.01" color="black" rotation="0 0 0" visible="false"></a-mixin>
+        <a-mixin id="hardWall" geometry="primitive: box; width: 0.1; height: 2.5; src: #hardWallTexture"></a-mixin>
       </a-assets>
 
       <a-camera id="gameCamera">
@@ -35,12 +38,14 @@
 
       <a-entity keyboard-controls="enabled: false" controls></a-entity>
 
-      <a-plane id="devFloor" src="#devFloorTexture" rotation="-90 0 0" height="100" width="100" position="0 -10 0"></a-plane>
+      <a-plane id="floor" src="#floorTexture" rotation="-90 0 0" height="100" width="100" position="0 -6 0"></a-plane>
       <a-sky id="devSky" src="#devSkyTexture"></a-sky>
       
-      <a-entity gltf-model="#soldierShootingModel" position="0 2 0"></a-entity>
-      <a-entity gltf-model="#soldierShootingModel" position="5 2 0"></a-entity>
-      <a-entity gltf-model="#soldierShootingModel" position="10 2 0"></a-entity>
+      <a-entity gltf-model="#soldierShootingModel" position="0 -4.3 0"></a-entity>
+      <a-entity gltf-model="#soldierShootingModel" position="2 -4.3 0"></a-entity>
+      <a-entity gltf-model="#soldierShootingModel" position="4 -4.3 0"></a-entity>
+
+      <a-entity mixin="hardWall" position="0 10 0"></a-entity>
     </a-scene>
   </body>
 </html>

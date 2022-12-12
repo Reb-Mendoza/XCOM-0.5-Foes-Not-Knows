@@ -2,7 +2,7 @@ let turnStep = 0;
 let abilityButtonCount = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
-let operator = {ID: [], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
+let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [3], Y: [3]};
 let alien = {ID: [], Action: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let buttonsPressable = 0;
 let controlMode = 0;
@@ -234,25 +234,25 @@ function heal(x,y,amount) {
 function move(x,y,direction) {
     var index = checkTile(x,y,"index");
     var faction = checkTile(x,y,"faction");
-    if (direction == "up") {
+    if ((direction == "up") && !(checkIfWall(x,y,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] + 1;
         } else if (faction == "alien") {
             alien.Y[index] = alien.Y[index] + 1;
         }
-    } else if (direction == "down") {
+    } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] - 1;
         } else if (faction == "alien") {
             alien.Y[index] = alien.Y[index] - 1;
         }
-    } else if (direction == "left") {
+    } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] - 1;
         } else if (faction == "alien") {
             alien.X[index] = alien.X[index] - 1;
         }
-    } else if (direction == "right") {
+    } else if ((direction == "right") && !(checkIfWall(x,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] + 1;
         } else if (faction == "alien") {
@@ -410,6 +410,7 @@ AFRAME.registerComponent("controls", {
             console.log("Esc pressed!");
             if (controlMode != 0) {
                 controlMode = 0;
+                showButtons();
             }
         });
         this.el.addEventListener("keydown:Space", function() {
