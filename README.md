@@ -52,7 +52,9 @@
 #### 12/11/22
 1. Big day. Time to grind out this thing for hours.
 2. Did, and still am, doing a lot of work. I've decided that a lot of the fuctions of the buttons other than the first two are not required to have a working game. I will perhaps come back to them at a later time, but for the purposes of the project, I'll need to make some compromises.
+3. Will need a function that converts the 2D coordinate system to the 3D one. Once the processing coordinates and the coordinates for everything visual are synced, things should be easy.
 
+#### 12/12/22
 
 
 
