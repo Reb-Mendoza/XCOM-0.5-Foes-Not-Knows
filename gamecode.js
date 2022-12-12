@@ -339,6 +339,8 @@ function action(buttonNumber) {
     //Movement
     if (buttonNumber == 1) {
         controlMode = 1;
+        var camera = document.querySelector("#gameCamera");
+        camera.setAttribute("enabled", "false");
         text("WASD - Operator moves one tile in that dierection, if possible.\nEsc - Cancel movement.");
     //Fire Weapon
     } else if (buttonNumber == 2) {
