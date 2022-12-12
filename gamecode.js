@@ -438,7 +438,8 @@ AFRAME.registerComponent("ability-button", {
         number: {type: 'number', default: 0}
     },
     init: function () {
-        var buttonNumber = el.getAttribute('number');
+        var element = document.querySelector("button" + number);
+        var buttonNumber = element.getAttribute('number');
         this.el.addEventListener("click", function() {
             if (buttonsPressable == 1) {
                 action(buttonNumber);
