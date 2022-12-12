@@ -23,12 +23,10 @@ function abs(x) {
     }
     return x
 }
-
 //Returns the distance between two number inputs. Output Number
 function dist(x,targetX) {
     return abs(targetX - x);
 }
-
 //Returns what team or what unit index is on a given tile. Output: String
 function checkTile(x,y,type) {
     var faction
@@ -59,7 +57,6 @@ function checkTile(x,y,type) {
         return index;
     }
 }
-
 //Returns whether or not there is a wall on a tile, given a position and a direction. Output: Boolean
 function checkIfWall(x,y,direction) {
     if (direction == "vertical") {
@@ -78,7 +75,6 @@ function checkIfWall(x,y,direction) {
         return false;
     }
 }
-
 //Returns whether or not there is a line of fire between two points given an initial position, a target position, and a sight range. Output: Boolean
 function canHit(x,y,targetX,targetY,range) {
     if ((dist(x,targetX) > 1) && (dist(y,targetY) > 1)) {
@@ -89,7 +85,6 @@ function canHit(x,y,targetX,targetY,range) {
         return false;
     }
 }
-
 //Returns whether or not there is a line of sight between two points given an initial position, a target position, and a sight range. Output: Boolean
 //This differs from canHit in that it considers how walls and smoke block vision between those two points.
 function canSee(x,y,targetX,targetY,range) {
@@ -192,7 +187,6 @@ function canSee(x,y,targetX,targetY,range) {
         return false;
     }
 }
-
 //This function is called when a unit is meant to be killed. If it's an alien, it is removed from the game. If it's an operator, they enter a DBNO state.
 function kill(x,y) {
     var index = (checkTile(x,y,"index"));
@@ -205,7 +199,6 @@ function kill(x,y) {
     }
     console.log("Unit Killed!");
 }
-
 //Reduce the HP stat of a unit by a specified amount. If its HP reaches below 1, kill it.
 function damage(x,y,amount) {
     var index = (checkTile(x,y,"index"));
@@ -222,7 +215,6 @@ function damage(x,y,amount) {
         kill(x,y);
     }
 }
-
 //Increase the HP stat of a unit by a specified amount, up to a cap.
 function heal(x,y,amount) {
     var index = (checkTile(x,y,"index"));
@@ -238,7 +230,6 @@ function heal(x,y,amount) {
         alien.HP[index] = alien.HP[index] + amount;
     }
 }
-
 //Move a unit one space in a given direction.
 function move(x,y,direction) {
     var index = checkTile(x,y,"index");
@@ -269,7 +260,6 @@ function move(x,y,direction) {
         }
     }
 }
-
 //Check whether or not a shot that has been fired hits. Output: Boolean
 function toHit(x,y,targetX,targetY,weapon) {
     var distance = dist(x,targetX);
@@ -284,7 +274,6 @@ function toHit(x,y,targetX,targetY,weapon) {
         return false
     }
 }
-
 //Check what type of unit has been selected. If it's an operator, show its controls. If it's an alien, show its description, ONLY if it had line of sight.
 function selectUnit(x,y) {
     if (checkTile(x,y,"faction") == "operator") {
@@ -297,7 +286,6 @@ function selectUnit(x,y) {
         hideButtons();
     }
 }
-
 //Target a unit with an ability.
 function targetUnit(x,y) {
     if (controlMode == 2) {
@@ -313,7 +301,7 @@ function targetUnit(x,y) {
 
 //Check what action is tied to which button in the HUD, then call that action to be performed.
 function action(buttonNumber) {
-    console.log("action" + toString(buttonNumber))
+    console.log("action" + buttonNumber);
     //Movement
     if (buttonNumber == 1) {
         controlMode = 1;
