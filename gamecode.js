@@ -234,27 +234,37 @@ function heal(x,y,amount) {
 function move(x,y,direction) {
     var index = checkTile(x,y,"index");
     var faction = checkTile(x,y,"faction");
+    var element
+    if (faction == "operator") {
+        element = document.querySelector("#operator" + index.toString())
+    } else if (faction == "alien") {
+        element = document.querySelector("#alien" + index.toString())
+    }
     if ((direction == "up") && !(checkIfWall(x,y,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] + 1;
+            element.setAttribute("position", "y: " + operator.Y[index].toString())
         } else if (faction == "alien") {
             alien.Y[index] = alien.Y[index] + 1;
         }
     } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] - 1;
+            element.setAttribute("position", "y: " + operator.Y[index].toString())
         } else if (faction == "alien") {
             alien.Y[index] = alien.Y[index] - 1;
         }
     } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] - 1;
+            element.setAttribute("position", "x: " + operator.X[index].toString())
         } else if (faction == "alien") {
             alien.X[index] = alien.X[index] - 1;
         }
     } else if ((direction == "right") && !(checkIfWall(x,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] + 1;
+            element.setAttribute("position", "x: " + operator.X[index].toString()) //CREATE A FUNCTION THAT CONVERTS THE 2D COORDINATE SYSTEM TO THE 3D ONE
         } else if (faction == "alien") {
             alien.X[index] = alien.X[index] + 1;
         }
