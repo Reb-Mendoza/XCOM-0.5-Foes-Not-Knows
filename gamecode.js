@@ -478,7 +478,7 @@ AFRAME.registerComponent("controls", {
 
 AFRAME.registerComponent("ability-button", {
     schema: {
-        number: {type: 'number', default: 0}
+        number: {type: "int", default: 0}
     },
     init: function () {
         var buttonNumber = this.data.number;
@@ -491,12 +491,14 @@ AFRAME.registerComponent("ability-button", {
 });
 
 AFRAME.registerComponent("unit", {
+    schema: {
+        number: {type: "int", default: 0}
+    },
     init: function () {
         this.el.addEventListener("click", function() {
             console.log("I was clicked!");
-            var element = this.el;
-            var xValue = (element.object3D.position.x) * -0.5;
-            var yValue = (element.object3D.position.z) * 0.5;
+            var xValue = operator.X[this.number - 1];
+            var yValue = operator.Y[this.number - 1];
             if (controlMode == 0) {
                 selectUnit(xValue,yValue);
             } else if (controlMode == 2) {
@@ -505,3 +507,4 @@ AFRAME.registerComponent("unit", {
         });
     }
 });
+
