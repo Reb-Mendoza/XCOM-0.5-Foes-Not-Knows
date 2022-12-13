@@ -344,6 +344,7 @@ function selectUnit(x,y) {
     entityEl.setAttribute("id", "selectionCircle");
     entityEl.object3D.position.set((x * -2), -5.97, (y * 2))
     if (checkTile(x,y,"faction") == "operator") {
+        console.log("operator");
         entityEl.setAttribute("material", "color", "green");
         selected.X = x
         selected.Y = y
@@ -376,7 +377,6 @@ function targetUnit(x,y) {
         }
     }
 }
-
 //Check what action is tied to which button in the HUD, then call that action to be performed.
 function action(buttonNumber) {
     console.log("action" + buttonNumber);
@@ -408,15 +408,15 @@ function action(buttonNumber) {
 
     } 
 }
-
 //Show HUD buttons. Based on which operator you've selected.
 function showButtons() {
+    console.log("buttons shown");
     buttonsPressable = 1;
     
 }
-
 //Hide HUD buttons.
 function hideButtons() {
+    console.log("buttons hidden");
     buttonsPressable = 0;
 
 }
