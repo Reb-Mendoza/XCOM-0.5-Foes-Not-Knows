@@ -335,7 +335,6 @@ function toHit(x,y,targetX,targetY,weapon) {
 }
 //Check what type of unit has been selected. If it's an operator, show its controls. If it's an alien, show its description, ONLY if it had line of sight.
 function selectUnit(x,y) {
-    deselectUnit();
     var sceneEl = document.querySelector("a-scene");
     var entityEl = document.createElement("a-entity");
     sceneEl.appendChild(entityEl);
