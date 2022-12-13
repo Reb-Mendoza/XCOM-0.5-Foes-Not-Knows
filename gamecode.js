@@ -1,7 +1,7 @@
 let step = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
-let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [3], Y: [3]};
+let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [3], Y: [4]};
 let alien = {ID: [], Action: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let buttonsPressable = 0;
 let controlMode = 0;
@@ -528,10 +528,10 @@ AFRAME.registerComponent("unit", {
     init: function () {
         this.el.addEventListener("click", function() {
             console.log("I was clicked!");
-            console.log("x:" + operator.X[this.number - 1])
-            console.log("y:" + operator.Y[this.number - 1])
-            var xValue = operator.X[this.number - 1];
-            var yValue = operator.Y[this.number - 1];
+            console.log(operator.X[this.el.getAttribute("unit").number - 1]);
+            console.log(operator.Y[this.el.getAttribute("unit").number - 1]);
+            var xValue = operator.X[this.el.getAttribute("unit").number - 1];
+            var yValue = operator.Y[this.el.getAttribute("unit").number - 1];
             if (controlMode == 0) {
                 selectUnit(xValue,yValue);
             } else if (controlMode == 2) {
