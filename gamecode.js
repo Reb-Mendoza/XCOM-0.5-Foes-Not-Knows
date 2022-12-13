@@ -285,6 +285,9 @@ function move(x,y,direction) {
             alien.Y[index] = alien.Y[index] + 1;
         }
         unit.object3D.position.z += 2
+        if (faction == "operator") {
+            circle.object3D.position.z += 2
+        }
     } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] - 1;
@@ -292,6 +295,9 @@ function move(x,y,direction) {
             alien.Y[index] = alien.Y[index] - 1;
         }
         unit.object3D.position.z += -2
+        if (faction == "operator") {
+            circle.object3D.position.z += -2
+        }
     } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] - 1;
@@ -299,6 +305,9 @@ function move(x,y,direction) {
             alien.X[index] = alien.X[index] - 1;
         }
         unit.object3D.position.x += 2
+        if (faction == "operator") {
+            circle.object3D.position.x += 2
+        }
     } else if ((direction == "right") && !(checkIfWall(x,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] + 1;
@@ -306,6 +315,9 @@ function move(x,y,direction) {
             alien.X[index] = alien.X[index] + 1;
         }
         unit.object3D.position.x += -2
+        if (faction == "operator") {
+            circle.object3D.position.x += -2
+        }
     }
 }
 //Check whether or not a shot that has been fired hits. Output: Boolean
