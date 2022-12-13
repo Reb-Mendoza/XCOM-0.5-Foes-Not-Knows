@@ -1,4 +1,4 @@
-let turnStep = 0;
+let step = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
 let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [3], Y: [3]};
@@ -12,8 +12,21 @@ let smoke = {X: [], Y:[]};
 //Starts the game on a selected map.
 function startGame(map) {
     if (map == "Maze1") {
-
+        //ROM for the game's maps.
+        wall.vertical.X = [];
+        wall.vertical.Y = [];
+        wall.horizontal.X = [];
+        wall.horizontal.Y = [];
+        operator.X = [];
+        operator.Y = [];
+        alien.X = [];
+        alien.Y = [];
+        alien.ID = [];
     }
+}
+//Call this function between each turn step. It checks for effects that happen outside of the player's control.
+function turnStep(step) {
+
 }
 //Causes the textbow in the HUD to change.
 function text(value) {
@@ -481,8 +494,9 @@ AFRAME.registerComponent("unit", {
     init: function () {
         this.el.addEventListener("click", function() {
             console.log("I was clicked!");
-            var xValue = (this.el.object3D.position.x) * -0.5;
-            var yValue = (this.el.object3D.position.z) * 0.5;
+            var element = this.el;
+            var xValue = (element.object3D.position.x) * -0.5;
+            var yValue = (element.object3D.position.z) * 0.5;
             if (controlMode == 0) {
                 selectUnit(xValue,yValue);
             } else if (controlMode == 2) {
