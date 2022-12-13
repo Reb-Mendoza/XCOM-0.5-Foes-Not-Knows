@@ -343,16 +343,13 @@ function selectUnit(x,y) {
     entityEl.setAttribute("mixin", "selectionCircle");
     entityEl.setAttribute("id", "selectionCircle");
     entityEl.object3D.position.set((x * -2), -5.97, (y * 2))
+    selected.X = x
+    selected.Y = y
     if (checkTile(x,y,"faction") == "operator") {
-        console.log("operator");
         entityEl.setAttribute("material", "color", "green");
-        selected.X = x
-        selected.Y = y
         showButtons();
     } else if (checkTile(x,y,"faction") == "alien") {
         entityEl.setAttribute("material", "color", "red");
-        selected.X = x
-        selected.Y = y
         hideButtons();
     } else {
         console.log(checkTile(x,y,"faction"));
