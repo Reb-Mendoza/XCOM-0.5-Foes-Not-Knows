@@ -336,6 +336,7 @@ function toHit(x,y,targetX,targetY,weapon) {
 //Check what type of unit has been selected. If it's an operator, show its controls. If it's an alien, show its description, ONLY if it had line of sight.
 function selectUnit(x,y) {
     deselectUnit();
+    console.log("select");
     var sceneEl = document.querySelector("a-scene");
     var entityEl = document.createElement("a-entity");
     sceneEl.appendChild(entityEl);
@@ -383,7 +384,7 @@ function action(buttonNumber) {
     if (buttonNumber == 1) {
         controlMode = 1;
         var camera = document.querySelector("#gameCamera");
-        camera.setAttribute("look-controls", "enabled", "false");
+        camera.setAttribute("wasd-controls", "enabled", "false");
         text("WASD - Operator moves one tile in that dierection, if possible.\nEsc - Cancel movement.");
     //Fire Weapon
     } else if (buttonNumber == 2) {
