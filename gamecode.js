@@ -480,8 +480,8 @@ AFRAME.registerComponent("unit", {
     init: function () {
         this.el.addEventListener("click", function() {
             console.log("I was clicked!");
-            var xValue = this.el.getAttribute(x);
-            var yValue = this.el.getAttribute(y);
+            var xValue = this.el.getAttribute("x");
+            var yValue = this.el.getAttribute("y");
             if (controlMode == 0) {
                 selectUnit(xValue,yValue);
             } else if (controlMode == 2) {
