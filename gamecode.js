@@ -28,11 +28,10 @@ function startGame(map) {
 function turnStep(step) {
 
 }
-//Causes the textbow in the HUD to change.
+//Causes the textbox in the HUD to change.
 function text(value) {
-    var HUDText = string(value);
     var entity = document.querySelector('#hudText');
-    entity.setAttribute("value", HUDText);
+    entity.setAttribute("text", "value", value);
 }
 //Returns the absolute value of a number input. Output: Number
 function abs(x) {
@@ -342,13 +341,14 @@ function selectUnit(x,y) {
     sceneEl.appendChild(entityEl);
     entityEl.setAttribute("mixin", "selectionCircle");
     entityEl.setAttribute("id", "selectionCircle");
+    entityEl.object3D.position.set((x * -2), -5.97, (y * 2))
     if (checkTile(x,y,"faction") == "operator") {
-        entityEl.setAttribute("color", "green");
+        entityEl.setAttribute("material", "color", "green");
         selected.X = x
         selected.Y = y
         showButtons();
     } else if (checkTile(x,y,"faction") == "alien") {
-        entityEl.setAttribute("color", "red");
+        entityEl.setAttribute("material", "color", "red");
         selected.X = x
         selected.Y = y
         hideButtons();
@@ -356,7 +356,8 @@ function selectUnit(x,y) {
 }
 //Deselect whicever unit is selected.
 function deselectUnit() {
-
+    var entityEl = document.querySelector("#selectionCircle");
+    entityEl.parentNode.removeChild(entityEl);
 }
 //Target a unit with an ability.
 function targetUnit(x,y) {
@@ -378,7 +379,7 @@ function action(buttonNumber) {
     if (buttonNumber == 1) {
         controlMode = 1;
         var camera = document.querySelector("#gameCamera");
-        camera.setAttribute("enabled", "false");
+        camera.setAttribute("look-controls", "enabled", "false");
         text("WASD - Operator moves one tile in that dierection, if possible.\nEsc - Cancel movement.");
     //Fire Weapon
     } else if (buttonNumber == 2) {
