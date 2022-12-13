@@ -411,13 +411,19 @@ function action(buttonNumber) {
 function showButtons() {
     console.log("buttons shown");
     buttonsPressable = 1;
-    
+    for (i=0; i<6; i++) {
+        var entity = document.querySelector("#button" + (i+1));
+        entity.setAttribute("visible", "true");
+    }
 }
 //Hide HUD buttons.
 function hideButtons() {
     console.log("buttons hidden");
     buttonsPressable = 0;
-
+    for (i=0; i<6; i++) {
+        var entity = document.querySelector("#button" + (i+1));
+        entity.setAttribute("visible", "false");
+    }
 }
 
 AFRAME.registerComponent("controls", {
