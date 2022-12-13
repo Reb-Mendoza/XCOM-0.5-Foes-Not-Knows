@@ -354,6 +354,8 @@ function selectUnit(x,y) {
         selected.X = x
         selected.Y = y
         hideButtons();
+    } else {
+        console.log(checkTile(x,y,"faction"));
     }
 }
 //Deselect whicever unit is selected.
