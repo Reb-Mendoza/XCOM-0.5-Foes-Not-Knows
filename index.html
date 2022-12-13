@@ -21,7 +21,7 @@
 
         <a-mixin id="abilityButton" ability-button geometry="primitive: plane; width: 0.01; height: 0.01" color="black" rotation="0 0 0" visible="false"></a-mixin>
         <a-mixin id="hardWall" geometry="primitive: box; width: 0.1; height: 4; depth: 2.1 src: #hardWallTexture"></a-mixin>
-        <a-mixin id="selectionCircle" geometry="primitive: circle; radius: 0.7; color: green" position="rotation: -90 0 0; y: -5.97" material="color: white"></a-mixin>
+        <a-mixin id="selectionCircle" geometry="primitive: circle; radius: 0.7; color: green" position="rotation: -90 0 0; y: -5.97" animation material="color: white"></a-mixin>
       </a-assets>
 
       <a-camera id="gameCamera">
@@ -42,9 +42,9 @@
       <a-plane id="floor" src="#floorTexture" rotation="-90 0 0" height="100" width="100" position="0 -6 0"></a-plane>
       <a-sky id="devSky" src="#devSkyTexture"></a-sky>
       
-      <a-entity id="operator1" gltf-model="#soldierShootingModel" unit="number: 1" position="0 -4.3 0"></a-entity>
-      <a-entity id="operator2" gltf-model="#soldierShootingModel" unit="number: 2" position="2 -4.3 0"></a-entity>
-      <a-entity id="operator3" gltf-model="#soldierShootingModel" unit="number: 3" position="4 -4.3 0"></a-entity>
+      <a-entity id="operator1" gltf-model="#soldierShootingModel" unit="number: 1" position="0 -4.3 0" animation></a-entity>
+      <a-entity id="operator2" gltf-model="#soldierShootingModel" unit="number: 2" position="2 -4.3 0" animation></a-entity>
+      <a-entity id="operator3" gltf-model="#soldierShootingModel" unit="number: 3" position="4 -4.3 0" animation></a-entity>
 
       <a-entity mixin="hardWall" position="0 -4 0"></a-entity>
     </a-scene>
