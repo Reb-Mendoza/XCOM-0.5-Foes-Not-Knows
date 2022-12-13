@@ -1,5 +1,4 @@
 let turnStep = 0;
-let abilityButtonCount = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
 let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [3], Y: [3]};
@@ -10,6 +9,12 @@ let controlMode = 0;
 let wall = {vertical: {X: [4], Y:[3]}, horizontal: {X: [], Y:[]}};
 let smoke = {X: [], Y:[]};
 
+//Starts the game on a selected map.
+function startGame(map) {
+    if (map == "Maze1") {
+
+    }
+}
 //Causes the textbow in the HUD to change.
 function text(value) {
     var HUDText = string(value);
@@ -307,7 +312,7 @@ function selectUnit(x,y) {
     var sceneEl = document.querySelector("a-scene");
     var entityEl = document.createElement("a-entity");
     sceneEl.appendChild(entityEl);
-    entityEl.setAttribute("mixin", "hardWall");
+    entityEl.setAttribute("mixin", "selectionCircle");
     if (checkTile(x,y,"faction") == "operator") {
         entityEl.setAttribute("color", "green");
         selected.X = x
@@ -473,15 +478,11 @@ AFRAME.registerComponent("ability-button", {
 });
 
 AFRAME.registerComponent("unit", {
-    schema: {
-        x: {type: 'number', default: 1},
-        y: {type: 'number', default: 1},
-      },
     init: function () {
         this.el.addEventListener("click", function() {
             console.log("I was clicked!");
-            var xValue = this.el.getAttribute("x");
-            var yValue = this.el.getAttribute("y");
+            var xValue = (this.el.object3D.position.x) * -0.5;
+            var yValue = (this.el.object3D.position.z) * 0.5;
             if (controlMode == 0) {
                 selectUnit(xValue,yValue);
             } else if (controlMode == 2) {
