@@ -317,6 +317,7 @@ function move(x,y,direction) {
         } else if (faction == "alien") {
             alien.X[index] = alien.X[index] + 1;
         }
+        unit.object3D.visible = false;
         unit.object3D.position.x += -2;
         if (faction == "operator") {
             circle.object3D.position.x += -2;
