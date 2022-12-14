@@ -279,6 +279,7 @@ function move(x,y,direction) {
     }
     console.log(unit);
     console.log(circle);
+    console.log("move")
     if ((direction == "up") && !(checkIfWall(x,y,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] + 1;
