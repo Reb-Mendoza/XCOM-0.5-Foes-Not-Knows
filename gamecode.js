@@ -342,7 +342,7 @@ function selectUnit(x,y) {
     sceneEl.appendChild(entityEl);
     entityEl.setAttribute("mixin", "selectionCircle");
     entityEl.setAttribute("id", "selectionCircle");
-    entityEl.object3D.position.set((x * -2), -5.97, (y * 2))
+    entityEl.setAttribute("position", {x: (x * -2), y: -5.97 , z: (y * 2)})
     selected.X = x
     selected.Y = y
     if (checkTile(x,y,"faction") == "operator") {
