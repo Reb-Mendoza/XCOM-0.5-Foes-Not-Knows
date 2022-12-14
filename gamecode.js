@@ -527,7 +527,7 @@ AFRAME.registerComponent("unit", {
     },
     init: function () {
         this.el.addEventListener("click", function() {
-            console.log("I was clicked!");
+            console.log("0");
             console.log("1");
             console.log(this.data.number);
             console.log("2");
