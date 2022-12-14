@@ -283,9 +283,9 @@ function move(x,y,direction) {
         } else if (faction == "alien") {
             alien.Y[index] = alien.Y[index] + 1;
         }
-        unit.object3D.position.z += 2
+        unit.object3D.position.z += 2;
         if (faction == "operator") {
-            circle.object3D.position.z += 2
+            circle.object3D.position.z += 2;
         }
     } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal"))) {
         if (faction == "operator") {
@@ -293,9 +293,9 @@ function move(x,y,direction) {
         } else if (faction == "alien") {
             alien.Y[index] = alien.Y[index] - 1;
         }
-        unit.object3D.position.z += -2
+        unit.object3D.position.z += -2;
         if (faction == "operator") {
-            circle.object3D.position.z += -2
+            circle.object3D.position.z += -2;
         }
     } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical"))) {
         if (faction == "operator") {
@@ -303,9 +303,9 @@ function move(x,y,direction) {
         } else if (faction == "alien") {
             alien.X[index] = alien.X[index] - 1;
         }
-        unit.object3D.position.x += 2
+        unit.object3D.position.x += 2;
         if (faction == "operator") {
-            circle.object3D.position.x += 2
+            circle.object3D.position.x += 2;
         }
     } else if ((direction == "right") && !(checkIfWall(x,y,"vertical"))) {
         if (faction == "operator") {
@@ -313,9 +313,9 @@ function move(x,y,direction) {
         } else if (faction == "alien") {
             alien.X[index] = alien.X[index] + 1;
         }
-        unit.object3D.position.x += -2
+        unit.object3D.position.x += -2;
         if (faction == "operator") {
-            circle.object3D.position.x += -2
+            circle.object3D.position.x += -2;
         }
     }
 }
