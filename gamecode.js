@@ -1,7 +1,7 @@
 let step = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
-let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [3], Y: [4]};
+let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [1], Y: [1]};
 let alien = {ID: [], Action: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let buttonsPressable = 0;
 let controlMode = 0;
@@ -277,6 +277,8 @@ function move(x,y,direction) {
     } else if (faction == "alien") {
         unit = document.querySelector("#alien" + index.toString())
     }
+    console.log(unit);
+    console.log(circle);
     if ((direction == "up") && !(checkIfWall(x,y,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] + 1;
