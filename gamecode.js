@@ -274,7 +274,7 @@ function move(x,y,direction) {
     console.log("move1")
     if (faction == "operator") {
         unit = document.querySelector("#operator" + index.toString()).object3D.position;
-        circle = document.querySelector("#selectionCircle").object3D.position;
+        //circle = document.querySelector("#selectionCircle").object3D.position;
     } else if (faction == "alien") {
         unit = document.querySelector("#alien" + index.toString())
     }
@@ -289,7 +289,7 @@ function move(x,y,direction) {
         }
         unit.object3D.position.z += 2;
         if (faction == "operator") {
-            circle.object3D.position.z += 2;
+            //circle.object3D.position.z += 2;
         }
     } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal"))) {
         if (faction == "operator") {
