@@ -532,7 +532,7 @@ AFRAME.registerComponent("unit", {
             console.log(this.data.number);
             console.log("2");
             console.log(this.data);
-            var entity = this.el;
+            var entity = document.querySelector("#operator1");
             console.log("3");
             console.log(entity.getAttribute("unit").number);
             var xValue = operator.X[this.el.getAttribute("unit").number - 1];
