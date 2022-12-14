@@ -272,8 +272,8 @@ function move(x,y,direction) {
     var unit;
     var circle;
     if (faction == "operator") {
-        unit = document.querySelector("#operator" + index.toString())
-        circle = document.querySelector("#selectionCircle")
+        unit = document.querySelector("#operator" + index.toString()).object3D;
+        circle = document.querySelector("#selectionCircle").object3D;
     } else if (faction == "alien") {
         unit = document.querySelector("#alien" + index.toString())
     }
