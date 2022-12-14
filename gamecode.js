@@ -267,10 +267,11 @@ function heal(x,y,amount) {
 }
 //Move a unit one space in a given direction.
 function move(x,y,direction) {
-    var index = checkTile(x,y,"index");
+    var index = checkTile(x,y,"index") + 1;
     var faction = checkTile(x,y,"faction");
     var unit;
     var circle;
+    console.log("move1")
     if (faction == "operator") {
         unit = document.querySelector("#operator" + index.toString()).object3D;
         circle = document.querySelector("#selectionCircle").object3D;
@@ -279,7 +280,7 @@ function move(x,y,direction) {
     }
     console.log(unit);
     console.log(circle);
-    console.log("move")
+    console.log("move2")
     if ((direction == "up") && !(checkIfWall(x,y,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] + 1;
