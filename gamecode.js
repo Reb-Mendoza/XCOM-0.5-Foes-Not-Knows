@@ -526,6 +526,7 @@ AFRAME.registerComponent("unit", {
         number: {type: "int", default: 0}
     },
     init: function () {
+        console.log(this.data.number);
         var xValue = operator.X[this.data.number - 1];
         var yValue = operator.Y[this.data.number - 1];
         this.el.addEventListener("click", function() {
