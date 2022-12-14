@@ -528,8 +528,13 @@ AFRAME.registerComponent("unit", {
     init: function () {
         this.el.addEventListener("click", function() {
             console.log("I was clicked!");
-            console.log(this.el.getAttribute("unit").number);
-            console.log(this.el.getAttribute("unit").number);
+            console.log("1");
+            console.log(this.data.number);
+            console.log("2");
+            console.log(this.data);
+            var entity = this.el;
+            console.log("3");
+            console.log(entity.getAttribute("unit").number);
             var xValue = operator.X[this.el.getAttribute("unit").number - 1];
             var yValue = operator.Y[this.el.getAttribute("unit").number - 1];
             if (controlMode == 0) {
