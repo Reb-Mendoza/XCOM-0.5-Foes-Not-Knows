@@ -16,8 +16,8 @@ function startGame(map) {
 
         wall.vertical.X = [1,4,11,1,4,5,7,11,1,4,7,11,1,5,7,11,1,2,4,5,8,10,11,1,4,5,10,11,1,2,3,8,10,11,1,4,7,11,1,4,10,11,1,4,7,11];
         wall.vertical.Y = [11,11,11,10,10,10,10,10,9,9,9,9,8,8,8,8,7,7,7,7,7,7,7,6,6,6,6,6,5,5,5,5,5,5,4,4,4,4,3,3,3,3,2,2,2,2];
-        wall.horizontal.X = [];
-        wall.horizontal.Y = [];
+        wall.horizontal.X = [2,3,4,5,6,7,8,9,10,11,6,7,2,4,3,4,6,8,9,10,4,6,7,8,3,5,7,10,2,4,8,9,10,2,3,4,5,6,7,8,9,10,11];
+        wall.horizontal.Y = [11,11,11,11,11,11,11,11,11,11,10,10,8,8,7,7,7,7,7,7,5,5,5,5,4,4,4,4,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1];
         mapSize.X = 10;
         mapSize.Y = 10;
         operator.X = [];
@@ -373,7 +373,9 @@ function selectUnit(x,y) {
     var index = checkTile(x,y,"index") + 1;
     var faction = checkTile(x,y,"faction");
     var unit;
+    console.log(index);
     if (faction == "operator") {
+        console.log("#operator" + index.toString());
         unit = document.querySelector("#operator" + index.toString());
     } else if (faction == "alien") {
         unit = document.querySelector("#alien" + index.toString())
