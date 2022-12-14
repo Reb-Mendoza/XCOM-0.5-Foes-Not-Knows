@@ -527,16 +527,11 @@ AFRAME.registerComponent("unit", {
     },
     init: function () {
         this.el.addEventListener("click", function() {
-            console.log("0");
+            console.log("I was clicked.");
             console.log("1");
             console.log(this.data.number);
-            console.log("2");
-            console.log(this.data);
-            var entity = document.querySelector("#operator1");
-            console.log("3");
-            console.log(entity.getAttribute("unit").number);
-            var xValue = operator.X[this.el.getAttribute("unit").number - 1];
-            var yValue = operator.Y[this.el.getAttribute("unit").number - 1];
+            var xValue = operator.X[this.data.number - 1];
+            var yValue = operator.Y[this.data.number - 1];
             if (controlMode == 0) {
                 selectUnit(xValue,yValue);
             } else if (controlMode == 2) {
