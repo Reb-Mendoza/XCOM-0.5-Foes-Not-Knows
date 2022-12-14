@@ -1,28 +1,32 @@
 let step = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
-let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [1, 1, 1], Y: [1, 2, 3]};
-let alien = {ID: [], Action: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
+let operator = {ID: [1], Action: [2,2,2], SightRange: []. MaxAmmo: [], Ammo: [], MaxMoves: [3,3,3], Moves: [3,3,3], MaxHP: [4,4,4], HP: [4,4,4], X: [], Y: []};
+let alien = {ID: [], Action: [], SightRange: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let buttonsPressable = 0;
 let controlMode = 0;
 //Vertical walls are described by the coordinate to the left of the wall. Horizontal walls are described by the coordinate below the wall.
 let wall = {vertical: {X: [4], Y:[3]}, horizontal: {X: [], Y:[]}};
-let smoke = {X: [], Y:[]};
+let mapSize = {X: 0, Y: 0};
 
 //Starts the game on a selected map.
 function startGame(map) {
-    if (map == "Maze1") {
+    if (map == "Office") {
         //ROM for the game's maps.
-        wall.vertical.X = [];
-        wall.vertical.Y = [];
+
+        wall.vertical.X = [1,4,11,1,4,5,7,11,1,4,7,11,1,5,7,11,1,2,4,5,8,10,11,1,4,5,10,11,1,2,3,8,10,11,1,4,7,11,1,4,10,11,1,4,7,11];
+        wall.vertical.Y = [11,11,11,10,10,10,10,10,9,9,9,9,8,8,8,8,7,7,7,7,7,7,7,6,6,6,6,6,5,5,5,5,5,5,4,4,4,4,3,3,3,3,2,2,2,2];
         wall.horizontal.X = [];
         wall.horizontal.Y = [];
+        mapSize.X = 10;
+        mapSize.Y = 10;
         operator.X = [];
         operator.Y = [];
         alien.X = [];
         alien.Y = [];
         alien.ID = [];
     }
+    //Now place walls where they belong.
 }
 //Call this function between each turn step. It checks for effects that happen outside of the player's control.
 function turnStep(step) {
@@ -62,7 +66,7 @@ function createWall(x,y,direction) {
     entityEl.object3D.position.set(xValue, 0, zValue);
     entityEl.object3D.rotation.y = THREE.Math.degToRad(degrees);
 }
-//Returns what team or what unit index is on a given tile. Output: String
+//Returns what team or what unit index is on a given tile. Output: String //CAN BE OPTIMIZED
 function checkTile(x,y,type) {
     var faction = "none";
     var index
@@ -222,6 +226,44 @@ function canSee(x,y,targetX,targetY,range) {
         return false;
     }
 }
+//Call this function to update the Fog of War.
+function updateFog() {
+    //Fog all tiles.
+    var sceneEl = document.querySelector("a-scene");
+    var fog;
+    for (m=0; m < mapSize.Y; m++) {
+        for (n=0; n < mapSize.X; n++) {
+            var fog = document.createElement("a-entity");
+            sceneEl.appendChild(fog);
+            fog.setAttribute("mixin", "fogOfWar");
+            fog.setAttribute("position", {x: n*-2, y: -4, z: m*2});
+            fog.setAttribute("id", ("fog" + n + m));
+        }
+    }
+    //Hide all enemies.
+    var enemy;
+    for (a=0; a < alien.X.length; a++) {
+        enemy = document.querySelector("#alien" + (a+1).toString());
+        enemy.setAttribute("visible", "false");
+    }
+    for (l=0; l < operator.X.length; l++) {
+        checkX = (operator.X[l]);
+        checkY = (operator.Y[l]);
+        var range = operator.SightRange[l];
+        for (m=0; m < mapSize.Y; m++) {
+            for (n=0; n < mapSize.X; n++) {
+                if ((canSee(checkX,checkY,n+1,m+1,range) == true) && (checkTile(n+1,m+1,"faction") == "alien")) {
+                    //Remove fog at the specified location.
+                    fog = document.querySelector("fog" + n + m);
+                    fog.parentNode.removeChild(fog);
+                    //Show an enemy at a specified location.
+                    enemy = document.querySelector("#alien" + (checkTile(n+1,m+1,index)+1).toString());
+                    enemy.setAttribute("visible", "true");
+                }
+            }
+        }
+    }
+}
 //This function is called when a unit is meant to be killed. If it's an alien, it is removed from the game. If it's an operator, they enter a DBNO state.
 function kill(x,y) {
     var index = (checkTile(x,y,"index"));
@@ -308,6 +350,7 @@ function move(x,y,direction) {
         unit.object3D.position.x += -2;
         unit.object3D.rotation.y = THREE.Math.degToRad(270);
     }
+    updateFog();
     selectUnit(x,y);
 }
 //Check whether or not a shot that has been fired hits. Output: Boolean
@@ -339,7 +382,7 @@ function selectUnit(x,y) {
     var entityEl = document.createElement("a-entity");
     unit.appendChild(entityEl);
     entityEl.setAttribute("mixin", "selectionCircle");
-    entityEl.setAttribute("position", {x: 0, y: -1.7 , z: 0})
+    entityEl.setAttribute("position", {x: 0, y: -1.6 , z: 0})
     selected.X = x
     selected.Y = y
     if (checkTile(x,y,"faction") == "operator") {
@@ -523,10 +566,7 @@ AFRAME.registerComponent("unit", {
     init: function () {
         var xValue = operator.X[this.data.number - 1];
         var yValue = operator.Y[this.data.number - 1];
-        console.log(xValue);
-        console.log(yValue);
         this.el.addEventListener("click", function() {
-            console.log("I was clicked.");
             if (controlMode == 0) {
                 selectUnit(xValue,yValue);
             } else if (controlMode == 2) {

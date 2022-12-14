@@ -1,0 +1,11 @@
+Model Information:
+* title:	Grey Alien idle
+* source:	https://sketchfab.com/3d-models/grey-alien-idle-4983ac47fa674c1e8e9230c8afa4546e
+* author:	ShaxerTakkuY (https://sketchfab.com/ShaxerTakkuY)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Grey Alien idle" (https://sketchfab.com/3d-models/grey-alien-idle-4983ac47fa674c1e8e9230c8afa4546e) by ShaxerTakkuY (https://sketchfab.com/ShaxerTakkuY) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
