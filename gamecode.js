@@ -1,7 +1,7 @@
 let step = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
-let operator = {ID: [1], Action: [2,2,2], SightRange: []. MaxAmmo: [], Ammo: [], MaxMoves: [3,3,3], Moves: [3,3,3], MaxHP: [4,4,4], HP: [4,4,4], X: [], Y: []};
+let operator = {ID: [1], Action: [2,2,2], SightRange: [], MaxAmmo: [], Ammo: [], MaxMoves: [3,3,3], Moves: [3,3,3], MaxHP: [4,4,4], HP: [4,4,4], X: [], Y: []};
 let alien = {ID: [], Action: [], SightRange: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let buttonsPressable = 0;
 let controlMode = 0;
