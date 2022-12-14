@@ -1,115 +1,3 @@
-AFRAME.registerComponent("controls", {
-    init: function () {
-        //Actions
-        this.el.addEventListener("keydown:Digit1", function() {
-            console.log("1 pressed!");
-            if (buttonsPressable == 1) {
-                action(1);
-            }
-        });
-        this.el.addEventListener("keydown:Digit2", function() {
-            console.log("2 pressed!");
-            if (buttonsPressable == 1) {
-                action(2);
-            }
-        });
-        this.el.addEventListener("keydown:Digit3", function() {
-            console.log("3 pressed!");
-            if (buttonsPressable == 1) {
-                action(3);
-            }
-        });
-        this.el.addEventListener("keydown:Digit4", function() {
-            console.log("4 pressed!");
-            if (buttonsPressable == 1) {
-                action(4);
-            }
-        });
-        this.el.addEventListener("keydown:Digit5", function() {
-            console.log("5 pressed!");
-            if (buttonsPressable == 1) {
-                action(5);
-            }
-        });
-        this.el.addEventListener("keydown:Digit6", function() {
-            console.log("6 pressed!");
-            if (buttonsPressable == 1) {
-                action(6);
-            }
-        });
-        //Movement Actions
-        this.el.addEventListener("keydown:KeyW", function() {
-            console.log("W pressed!");
-            if (controlMode == 1) {
-                move(selected.X, selected.Y, "up");
-            }
-        });
-        this.el.addEventListener("keydown:KeyA", function() {
-            console.log("A pressed!");
-            if (controlMode == 1) {
-                move(selected.X, selected.Y, "left");
-            }
-        });
-        this.el.addEventListener("keydown:KeyS", function() {
-            console.log("S pressed!");
-            if (controlMode == 1) {
-                move(selected.X, selected.Y, "down");
-            }
-        });
-        this.el.addEventListener("keydown:KeyD", function() {
-            console.log("D pressed!");
-            if (controlMode == 1) {
-                move(selected.X, selected.Y, "right");
-            }
-        });
-        //Other
-        this.el.addEventListener("keydown:Escape", function() {
-            console.log("Esc pressed!");
-            if (controlMode != 0) {
-                controlMode = 0;
-                showButtons();
-            }
-        });
-        this.el.addEventListener("keydown:Space", function() {
-            console.log("Space pressed!");
-            if ((controlMode == 2) && (targeted.X != 0) && (targeted.Y != 0) && toHit(selected.X,selected.Y,targeted.X,targeted.Y,1)) {
-                damage(targeted.X,targeted.Y,5);
-            }
-        });
-    }
-});
-
-AFRAME.registerComponent("ability-button", {
-    schema: {
-        number: {type: "int", default: 0}
-    },
-    init: function () {
-        var buttonNumber = this.data.number;
-        this.el.addEventListener("click", function() {
-            if (buttonsPressable == 1) {
-                action(buttonNumber);
-            }
-        });
-    }
-});
-
-AFRAME.registerComponent("unit", {
-    schema: {
-        number: {type: "int", default: 0}
-    },
-    init: function () {
-        var xValue = operator.X[this.data.number - 1];
-        var yValue = operator.Y[this.data.number - 1];
-        this.el.addEventListener("click", function() {
-            if (controlMode == 0) {
-                selectUnit(xValue,yValue);
-            } else if (controlMode == 2) {
-                targetUnit(xValue,yValue);
-            }
-        });
-    }
-});
-
 let step = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
@@ -575,3 +463,115 @@ function hideButtons() {
         entity.setAttribute("visible", "false");
     }
 }
+
+AFRAME.registerComponent("controls", {
+    init: function () {
+        //Actions
+        this.el.addEventListener("keydown:Digit1", function() {
+            console.log("1 pressed!");
+            if (buttonsPressable == 1) {
+                action(1);
+            }
+        });
+        this.el.addEventListener("keydown:Digit2", function() {
+            console.log("2 pressed!");
+            if (buttonsPressable == 1) {
+                action(2);
+            }
+        });
+        this.el.addEventListener("keydown:Digit3", function() {
+            console.log("3 pressed!");
+            if (buttonsPressable == 1) {
+                action(3);
+            }
+        });
+        this.el.addEventListener("keydown:Digit4", function() {
+            console.log("4 pressed!");
+            if (buttonsPressable == 1) {
+                action(4);
+            }
+        });
+        this.el.addEventListener("keydown:Digit5", function() {
+            console.log("5 pressed!");
+            if (buttonsPressable == 1) {
+                action(5);
+            }
+        });
+        this.el.addEventListener("keydown:Digit6", function() {
+            console.log("6 pressed!");
+            if (buttonsPressable == 1) {
+                action(6);
+            }
+        });
+        //Movement Actions
+        this.el.addEventListener("keydown:KeyW", function() {
+            console.log("W pressed!");
+            if (controlMode == 1) {
+                move(selected.X, selected.Y, "up");
+            }
+        });
+        this.el.addEventListener("keydown:KeyA", function() {
+            console.log("A pressed!");
+            if (controlMode == 1) {
+                move(selected.X, selected.Y, "left");
+            }
+        });
+        this.el.addEventListener("keydown:KeyS", function() {
+            console.log("S pressed!");
+            if (controlMode == 1) {
+                move(selected.X, selected.Y, "down");
+            }
+        });
+        this.el.addEventListener("keydown:KeyD", function() {
+            console.log("D pressed!");
+            if (controlMode == 1) {
+                move(selected.X, selected.Y, "right");
+            }
+        });
+        //Other
+        this.el.addEventListener("keydown:Escape", function() {
+            console.log("Esc pressed!");
+            if (controlMode != 0) {
+                controlMode = 0;
+                showButtons();
+            }
+        });
+        this.el.addEventListener("keydown:Space", function() {
+            console.log("Space pressed!");
+            if ((controlMode == 2) && (targeted.X != 0) && (targeted.Y != 0) && toHit(selected.X,selected.Y,targeted.X,targeted.Y,1)) {
+                damage(targeted.X,targeted.Y,5);
+            }
+        });
+    }
+});
+
+AFRAME.registerComponent("ability-button", {
+    schema: {
+        number: {type: "int", default: 0}
+    },
+    init: function () {
+        var buttonNumber = this.data.number;
+        this.el.addEventListener("click", function() {
+            if (buttonsPressable == 1) {
+                action(buttonNumber);
+            }
+        });
+    }
+});
+
+AFRAME.registerComponent("unit", {
+    schema: {
+        number: {type: "int", default: 0}
+    },
+    init: function () {
+        var xValue = operator.X[this.data.number - 1];
+        var yValue = operator.Y[this.data.number - 1];
+        this.el.addEventListener("click", function() {
+            if (controlMode == 0) {
+                selectUnit(xValue,yValue);
+            } else if (controlMode == 2) {
+                targetUnit(xValue,yValue);
+            }
+        });
+    }
+});
