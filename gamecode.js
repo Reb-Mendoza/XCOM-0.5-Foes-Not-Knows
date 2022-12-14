@@ -1,7 +1,7 @@
 let step = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
-let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [1], Y: [1]};
+let operator = {ID: [1], Action: [], MaxAmmo: [], Ammo: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [1, 1, 1], Y: [1, 2, 3]};
 let alien = {ID: [], Action: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let buttonsPressable = 0;
 let controlMode = 0;
@@ -528,9 +528,10 @@ AFRAME.registerComponent("unit", {
         number: {type: "int", default: 0}
     },
     init: function () {
-        console.log(this.data.number);
         var xValue = operator.X[this.data.number - 1];
         var yValue = operator.Y[this.data.number - 1];
+        console.log(xValue);
+        console.log(yValue);
         this.el.addEventListener("click", function() {
             console.log("I was clicked.");
             if (controlMode == 0) {
