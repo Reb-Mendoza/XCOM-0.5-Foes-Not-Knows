@@ -270,17 +270,12 @@ function move(x,y,direction) {
     var index = checkTile(x,y,"index") + 1;
     var faction = checkTile(x,y,"faction");
     var unit;
-    var circle;
     console.log("move1")
     if (faction == "operator") {
         unit = document.querySelector("#operator" + index.toString());
-        circle = document.querySelector("#selectionCircle");
     } else if (faction == "alien") {
         unit = document.querySelector("#alien" + index.toString())
     }
-    console.log(unit);
-    console.log(circle);
-    console.log("move2")
     if ((direction == "up") && !(checkIfWall(x,y,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] + 1;
@@ -288,9 +283,6 @@ function move(x,y,direction) {
             alien.Y[index] = alien.Y[index] + 1;
         }
         unit.object3D.position.z += 2;
-        if (faction == "operator") {
-            circle.object3D.position.z += 2;
-        }
     } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal"))) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] - 1;
@@ -298,9 +290,6 @@ function move(x,y,direction) {
             alien.Y[index] = alien.Y[index] - 1;
         }
         unit.object3D.position.z += -2;
-        if (faction == "operator") {
-            circle.object3D.position.z += -2;
-        }
     } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] - 1;
@@ -308,20 +297,13 @@ function move(x,y,direction) {
             alien.X[index] = alien.X[index] - 1;
         }
         unit.object3D.position.x += 2;
-        if (faction == "operator") {
-            circle.object3D.position.x += 2;
-        }
     } else if ((direction == "right") && !(checkIfWall(x,y,"vertical"))) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] + 1;
         } else if (faction == "alien") {
             alien.X[index] = alien.X[index] + 1;
         }
-        unit.object3D.visible = false;
         unit.object3D.position.x += -2;
-        if (faction == "operator") {
-            circle.object3D.position.x += -2;
-        }
     }
 }
 //Check whether or not a shot that has been fired hits. Output: Boolean
@@ -341,10 +323,16 @@ function toHit(x,y,targetX,targetY,weapon) {
 //Check what type of unit has been selected. If it's an operator, show its controls. If it's an alien, show its description, ONLY if it had line of sight.
 function selectUnit(x,y) {
     deselectUnit();
-    console.log("select");
-    var sceneEl = document.querySelector("a-scene");
+    var index = checkTile(x,y,"index") + 1;
+    var faction = checkTile(x,y,"faction");
+    var unit;
+    if (faction == "operator") {
+        unit = document.querySelector("#operator" + index.toString());
+    } else if (faction == "alien") {
+        unit = document.querySelector("#alien" + index.toString())
+    }
     var entityEl = document.createElement("a-entity");
-    sceneEl.appendChild(entityEl);
+    unit.appendChild(entityEl);
     entityEl.setAttribute("mixin", "selectionCircle");
     entityEl.setAttribute("id", "selectionCircle");
     entityEl.setAttribute("position", {x: (x * -2), y: -5.97 , z: (y * 2)})
