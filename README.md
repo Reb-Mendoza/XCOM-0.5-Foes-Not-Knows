@@ -56,6 +56,14 @@
 
 #### 12/12/22
 
+#### 12/13/22
+
+#### 12/14/22
+1. Wow I've been debugging for three days straight, and I don't have much to show for it other than that movement works.
+2. I should have the framework I need to make a working game now, though.
+3. It's time to make something out of what I've created; it will be very different from what I originally thought.
+
+#### 12/15/22
 
 
 
