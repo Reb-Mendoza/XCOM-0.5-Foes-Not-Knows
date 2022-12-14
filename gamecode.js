@@ -64,7 +64,7 @@ function createWall(x,y,direction) {
 }
 //Returns what team or what unit index is on a given tile. Output: String
 function checkTile(x,y,type) {
-    var faction
+    var faction = "none";
     var index
     for (i=0; i < operator.X.length; i++) {
         checkX = (operator.X[i]);
@@ -267,43 +267,45 @@ function heal(x,y,amount) {
 }
 //Move a unit one space in a given direction.
 function move(x,y,direction) {
-    var index = checkTile(x,y,"index") + 1;
     var faction = checkTile(x,y,"faction");
-    var unit;
-    console.log("move1")
-    if (faction == "operator") {
-        unit = document.querySelector("#operator" + index.toString());
-    } else if (faction == "alien") {
-        unit = document.querySelector("#alien" + index.toString())
-    }
-    if ((direction == "up") && !(checkIfWall(x,y,"horizontal"))) {
+    if (faction == "none") {
+        var index = checkTile(x,y,"index") + 1;
+        var unit;
+        console.log("move1")
         if (faction == "operator") {
-            operator.Y[index] = operator.Y[index] + 1;
+            unit = document.querySelector("#operator" + index.toString());
         } else if (faction == "alien") {
-            alien.Y[index] = alien.Y[index] + 1;
+            unit = document.querySelector("#alien" + index.toString())
         }
-        unit.object3D.position.z += 2;
-    } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal"))) {
-        if (faction == "operator") {
-            operator.Y[index] = operator.Y[index] - 1;
-        } else if (faction == "alien") {
-            alien.Y[index] = alien.Y[index] - 1;
+        if ((direction == "up") && !(checkIfWall(x,y,"horizontal"))) {
+            if (faction == "operator") {
+                operator.Y[index] = operator.Y[index] + 1;
+            } else if (faction == "alien") {
+                alien.Y[index] = alien.Y[index] + 1;
+            }
+            unit.object3D.position.z += 2;
+        } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal"))) {
+            if (faction == "operator") {
+                operator.Y[index] = operator.Y[index] - 1;
+            } else if (faction == "alien") {
+                alien.Y[index] = alien.Y[index] - 1;
+            }
+            unit.object3D.position.z += -2;
+        } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical"))) {
+            if (faction == "operator") {
+                operator.X[index] = operator.X[index] - 1;
+            } else if (faction == "alien") {
+                alien.X[index] = alien.X[index] - 1;
+            }
+            unit.object3D.position.x += 2;
+        } else if ((direction == "right") && !(checkIfWall(x,y,"vertical"))) {
+            if (faction == "operator") {
+                operator.X[index] = operator.X[index] + 1;
+            } else if (faction == "alien") {
+                alien.X[index] = alien.X[index] + 1;
+            }
+            unit.object3D.position.x += -2;
         }
-        unit.object3D.position.z += -2;
-    } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical"))) {
-        if (faction == "operator") {
-            operator.X[index] = operator.X[index] - 1;
-        } else if (faction == "alien") {
-            alien.X[index] = alien.X[index] - 1;
-        }
-        unit.object3D.position.x += 2;
-    } else if ((direction == "right") && !(checkIfWall(x,y,"vertical"))) {
-        if (faction == "operator") {
-            operator.X[index] = operator.X[index] + 1;
-        } else if (faction == "alien") {
-            alien.X[index] = alien.X[index] + 1;
-        }
-        unit.object3D.position.x += -2;
     }
 }
 //Check whether or not a shot that has been fired hits. Output: Boolean
@@ -331,10 +333,10 @@ function selectUnit(x,y) {
     } else if (faction == "alien") {
         unit = document.querySelector("#alien" + index.toString())
     }
+    console.log(unit);
     var entityEl = document.createElement("a-entity");
     unit.appendChild(entityEl);
     entityEl.setAttribute("mixin", "selectionCircle");
-    entityEl.setAttribute("id", "selectionCircle");
     entityEl.setAttribute("position", {x: (x * -2), y: -5.97 , z: (y * 2)})
     selected.X = x
     selected.Y = y
@@ -344,8 +346,6 @@ function selectUnit(x,y) {
     } else if (checkTile(x,y,"faction") == "alien") {
         entityEl.setAttribute("material", "color", "red");
         hideButtons();
-    } else {
-        console.log(checkTile(x,y,"faction"));
     }
 }
 //Deselect whicever unit is selected.
