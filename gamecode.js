@@ -270,7 +270,6 @@ function move(x,y,direction) {
     var faction = checkTile(x,y,"faction");
     var index = checkTile(x,y,"index") + 1;
     var unit;
-    console.log("move1")
     if (faction == "operator") {
         unit = document.querySelector("#operator" + index.toString());
     } else if (faction == "alien") {
@@ -283,6 +282,7 @@ function move(x,y,direction) {
             alien.Y[index] = alien.Y[index] + 1;
         }
         unit.object3D.position.z += 2;
+        unit.object3D.rotation.y = THREE.Math.degToRad(0);
     } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal")) && (checkTile(x,y-1,"faction") == "none")) {
         if (faction == "operator") {
             operator.Y[index] = operator.Y[index] - 1;
@@ -290,6 +290,7 @@ function move(x,y,direction) {
             alien.Y[index] = alien.Y[index] - 1;
         }
         unit.object3D.position.z += -2;
+        unit.object3D.rotation.y = THREE.Math.degToRad(180);
     } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical")) && (checkTile(x-1,y,"faction") == "none")) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] - 1;
@@ -297,6 +298,7 @@ function move(x,y,direction) {
             alien.X[index] = alien.X[index] - 1;
         }
         unit.object3D.position.x += 2;
+        unit.object3D.rotation.y = THREE.Math.degToRad(90);
     } else if ((direction == "right") && !(checkIfWall(x,y,"vertical")) && (checkTile(x+1,y,"faction") == "none")) {
         if (faction == "operator") {
             operator.X[index] = operator.X[index] + 1;
@@ -304,7 +306,9 @@ function move(x,y,direction) {
             alien.X[index] = alien.X[index] + 1;
         }
         unit.object3D.position.x += -2;
+        unit.object3D.rotation.y = THREE.Math.degToRad(270);
     }
+    selectUnit(x,y);
 }
 //Check whether or not a shot that has been fired hits. Output: Boolean
 function toHit(x,y,targetX,targetY,weapon) {
