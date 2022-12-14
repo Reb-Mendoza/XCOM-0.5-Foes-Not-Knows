@@ -13,20 +13,37 @@ let mapSize = {X: 0, Y: 0};
 function startGame(map) {
     if (map == "Office") {
         //ROM for the game's maps.
-
         wall.vertical.X = [1,4,11,1,4,5,7,11,1,4,7,11,1,5,7,11,1,2,4,5,8,10,11,1,4,5,10,11,1,2,3,8,10,11,1,4,7,11,1,4,10,11,1,4,7,11];
         wall.vertical.Y = [11,11,11,10,10,10,10,10,9,9,9,9,8,8,8,8,7,7,7,7,7,7,7,6,6,6,6,6,5,5,5,5,5,5,4,4,4,4,3,3,3,3,2,2,2,2];
         wall.horizontal.X = [2,3,4,5,6,7,8,9,10,11,6,7,2,4,3,4,6,8,9,10,4,6,7,8,3,5,7,10,2,4,8,9,10,2,3,4,5,6,7,8,9,10,11];
         wall.horizontal.Y = [11,11,11,11,11,11,11,11,11,11,10,10,8,8,7,7,7,7,7,7,5,5,5,5,4,4,4,4,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1];
         mapSize.X = 10;
         mapSize.Y = 10;
-        operator.X = [];
-        operator.Y = [];
-        alien.X = [];
-        alien.Y = [];
-        alien.ID = [];
+        operator.X = [10,9,11];
+        operator.Y = [11,9,8];
+        alien.X = [4,4,8,4,7,9];
+        alien.Y = [11,7,7,3,4,3];
+        alien.ID = [1,1,1,1,1,1];
     }
-    //Now place walls where they belong.
+
+    //Now place elements where they belong.
+    //Vertical Walls.
+    var sceneEl = document.querySelector("a-scene");
+    var entityEl = document.createElement("a-entity");
+    for (i=0; i < wall.vertical.X.length; i++) {
+        sceneEl.appendChild(entityEl);
+        entityEl.setAttribute("mixin", "hardWall");
+        entityEl.setAttribute("position", {x: (wall.vertical.X * 2)-1, y: -4.5, z: (wall.vertical.Y * -2)});
+        entityEl.setAttribute("rotation", {x: 0, y: 0, z: 0});
+    }
+    //Horizontal Walls.
+    for (i=0; i < wall.horizontal.X.length; i++) {
+        sceneEl.appendChild(entityEl);
+        entityEl.setAttribute("mixin", "hardWall");
+        entityEl.setAttribute("position", {x: (wall.vertical.X * 2), y: -4.5, z: (wall.vertical.Y * -2)+1});
+        entityEl.setAttribute("rotation", {x: 0, y: 90, z: 0});
+    }
+
 }
 //Call this function between each turn step. It checks for effects that happen outside of the player's control.
 function turnStep(step) {
