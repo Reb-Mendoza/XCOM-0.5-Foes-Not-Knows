@@ -360,8 +360,8 @@ function deselectUnit() {
     if ((selected.X != 0) && (selected.Y != 0)) {
         selected.X = 0
         selected.Y = 0
-        var entityEl = document.querySelector("#selectionCircle");
-        entityEl.parentNode.removeChild(entityEl);
+        var entity = document.querySelector("#selectionCircle");
+        entity.parentNode.removeChild(entity);
     }
 }
 //Target a unit with an ability.
