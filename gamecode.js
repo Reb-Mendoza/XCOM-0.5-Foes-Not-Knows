@@ -278,15 +278,17 @@ function canSee(x,y,targetX,targetY,range) {
 }
 //Call this function to update the Fog of War.
 function updateFog() {
-    //Fog all tiles.
+    //Fog all tiles, only if it doesn't exist yet.
     for (m=0; m < mapSize.Y; m++) {
         for (n=0; n < mapSize.X; n++) {
-            var sceneEl = document.querySelector("a-scene");
-            var fog = document.createElement("a-entity");
-            sceneEl.appendChild(fog);
-            fog.setAttribute("mixin", "fogOfWar");
-            fog.setAttribute("position", {x: (n*-2)+3, y: -4, z: (m*2)-3});
-            fog.setAttribute("id", ("fog" + n.toString() + m.toString()));
+            if ((document.querySelector("#fog" + n.toString() + m.toString())) == null) {
+                var sceneEl = document.querySelector("a-scene");
+                var fog = document.createElement("a-entity");
+                sceneEl.appendChild(fog);
+                fog.setAttribute("mixin", "fogOfWar");
+                fog.setAttribute("position", {x: (n*-2)-1, y: -5, z: (m*2)+1});
+                fog.setAttribute("id", ("fog" + n.toString() + m.toString()));
+            } 
         }
     }
     //Hide all enemies.
@@ -295,8 +297,8 @@ function updateFog() {
         enemy.setAttribute("visible", "false");
     }
     for (l=0; l < operator.X.length; l++) {
-        checkX = (operator.X[l]);
-        checkY = (operator.Y[l]);
+        var checkX = (operator.X[l]);
+        var checkY = (operator.Y[l]);
         var range = operator.SightRange[l];
         for (m=0; m < mapSize.Y; m++) {
             for (n=0; n < mapSize.X; n++) {
@@ -432,7 +434,7 @@ function selectUnit(x,y) {
     var entityEl = document.createElement("a-entity");
     unit.appendChild(entityEl);
     entityEl.setAttribute("mixin", "selectionCircle");
-    entityEl.setAttribute("position", {x: 0, y: -1.6 , z: 0})
+    entityEl.setAttribute("position", {x: 0, y: -1.4 , z: 0})
     selected.X = x
     selected.Y = y
     if (checkTile(x,y,"faction") == "operator") {
