@@ -26,13 +26,13 @@
         <a-mixin id="hardWall" geometry="primitive: box; width: 0.1; height: 3; depth: 2.1" position="y: -4.5" material="src: #hardWallTexture"></a-mixin>
         <a-mixin id="fogOfWar" geometry="primitive: box; width: 2; height: 3; depth: 2" position="y: -4.5" material="color: black"></a-mixin>
         <a-mixin id="selectionCircle" geometry="primitive: circle; radius: 0.7" position="y: -1.6" rotation="x: -90" animation material="color: white"></a-mixin>
-        <a-mixin id="operator" gltf-model="#soldierShootingModel" unit position="0 -4.3 0" animation></a-mixin>
+        <a-mixin id="operator" gltf-model="#soldierRunningModel" unit position="0 -4.3 0" animation-mixer="clip: root|run_front"></a-mixin>
         <a-mixin id="alien" gltf-model="#alienIdleModel" unit position="0 -4.3 0"></a-mixin>
       </a-assets>
 
       <a-camera id="gameCamera" position="0 -4 0" look-controls="enabled: false">
         <a-entity cursor="rayOrigin: mouse"></a-entity>
-        <a-plane id="hudBox" color="#1ce9d1" opacity="0.5" height= "0.05" width = "0.15" position="0 -0.07 -0.12" rotation="0 0 0" start-button>
+        <a-plane id="hudBox" color="#1ce9d1" opacity="0.7" height= "0.05" width = "0.15" position="0 -0.07 -0.12" rotation="0 0 0" start-button>
           <a-text id="hudText" color="white" height= "0.05" width = "0.14" position="-0.07 0.005 0" rotation="0 0 0" anchor="left" baseline="top" wrap-count="65" font="exo2semibold" value="Click this box to start the game!"></a-text>
         </a-plane>
 
