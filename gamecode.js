@@ -52,7 +52,7 @@ function startGame(map) {
         var entityEl = document.createElement("a-entity");
         sceneEl.appendChild(entityEl);
         entityEl.setAttribute("mixin", "operator");
-        entityEl.setAttribute("position", {x: (operator.X[i] * -2)+2, y: -4.5, z: (operator.Y[i] * 2)-2});
+        entityEl.setAttribute("position", {x: (operator.X[i] * -2)+3, y: -4.5, z: (operator.Y[i] * 2)-3});
         entityEl.setAttribute("unit", "number", (i+1));
     }
     //Aliens.
@@ -60,6 +60,10 @@ function startGame(map) {
     //Adjust the camera.
     var cameraEl = document.querySelector("#gameCamera");
     cameraEl.setAttribute("position", {x: (cameraPosition[0]), y: (cameraPosition[1]), z: (cameraPosition[2])});
+    
+    //Disable the start button.
+    var startButton = document.querySelector("#hudBox");
+    startButton.removeAttribute("start-button");
 }
 
 //Call this function between each turn step. It checks for effects that happen outside of the player's control.
@@ -616,7 +620,6 @@ AFRAME.registerComponent("start-button", {
     init: function () {
         this.el.addEventListener("click", function() {
             startGame("office");
-            this.el.removeAttribute("start-button");
         });
     }
 });
