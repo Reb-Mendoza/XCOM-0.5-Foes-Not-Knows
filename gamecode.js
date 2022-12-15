@@ -303,16 +303,15 @@ function updateFog() {
         var checkX = (operator.X[l]);
         var checkY = (operator.Y[l]);
         var range = operator.SightRange[l];
-        console.log('l')
         for (m=0; m < mapSize.Y; m++) {
             for (n=0; n < mapSize.X; n++) {
-                if ((canSee(checkX,checkY,n+1,m+1,range) == true)) {
+                if ((canSee(checkX,checkY,n+2,m+2,range) == true)) {
                     //Remove fog at the specified location.
                     fog = document.querySelector("#fog" + n.toString() + m.toString());
                     fog.parentNode.removeChild(fog);
-                    if (checkTile(n+1,m+1,"faction") == "alien"){
+                    if (checkTile(n+2,m+2,"faction") == "alien"){
                         //Show an enemy at a specified location.
-                        enemy = document.querySelector("#alien" + (checkTile(n+1,m+1,index)+1).toString());
+                        enemy = document.querySelector("#alien" + (checkTile(n+2,m+2,index)+1).toString());
                         enemy.setAttribute("visible", "true");
                     }
                 }
