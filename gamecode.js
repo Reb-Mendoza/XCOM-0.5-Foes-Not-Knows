@@ -33,17 +33,23 @@ function startGame(map) {
     for (i=0; i < wall.vertical.X.length; i++) {
         sceneEl.appendChild(entityEl);
         entityEl.setAttribute("mixin", "hardWall");
-        entityEl.setAttribute("position", {x: (wall.vertical.X * 2)-1, y: -4.5, z: (wall.vertical.Y * -2)});
+        entityEl.setAttribute("position", {x: (wall.vertical.X[i] * 2)-1, y: -4.5, z: (wall.vertical.Y[i] * -2)});
         entityEl.setAttribute("rotation", {x: 0, y: 0, z: 0});
     }
     //Horizontal Walls.
     for (i=0; i < wall.horizontal.X.length; i++) {
         sceneEl.appendChild(entityEl);
         entityEl.setAttribute("mixin", "hardWall");
-        entityEl.setAttribute("position", {x: (wall.vertical.X * 2), y: -4.5, z: (wall.vertical.Y * -2)+1});
+        entityEl.setAttribute("position", {x: (wall.horizontal.X[i] * 2), y: -4.5, z: (wall.horizontal.Y[i] * -2)+1});
         entityEl.setAttribute("rotation", {x: 0, y: 90, z: 0});
     }
-
+    //Operators.
+    for (i=0; i < operator.X.length; i++) {
+        sceneEl.appendChild(entityEl);
+        entityEl.setAttribute("mixin", "operator");
+        entityEl.setAttribute("position", {x: (operator.X[i] * 2), y: -4.5, z: (operator.Y[i] * -2)+1});
+        entityEl.setAttribute("unit", "number", (i+1));
+    }
 }
 //Call this function between each turn step. It checks for effects that happen outside of the player's control.
 function turnStep(step) {
