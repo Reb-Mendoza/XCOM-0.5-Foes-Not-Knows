@@ -116,13 +116,13 @@ function createWall(x,y,direction) {
     entityEl.object3D.position.set(xValue, 0, zValue);
     entityEl.object3D.rotation.y = THREE.Math.degToRad(degrees);
 }
-//Returns what team or what unit index is on a given tile. Output: String //CAN BE OPTIMIZED
+//Returns what team or what unit index is on a given tile. Output: String or Number
 function checkTile(x,y,type) {
     var faction = "none";
     var index
     for (i=0; i < operator.X.length; i++) {
         var checkX = (operator.X[i]);
-        var checkY = (operator.Y[j]);
+        var checkY = (operator.Y[i]);
         if (checkX == x && checkY == y) {
             faction = "operator";
             index = i;
@@ -130,7 +130,7 @@ function checkTile(x,y,type) {
     }
     for (i=0; i < alien.X.length; i++) {
         var checkX = (alien.X[i]);
-        var checkY = (alien.Y[j]);
+        var checkY = (alien.Y[i]);
         if (checkX == x && checkY == y) {
             faction = "alien";
             index = i;
