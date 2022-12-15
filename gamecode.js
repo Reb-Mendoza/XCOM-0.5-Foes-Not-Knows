@@ -291,7 +291,7 @@ function updateFog() {
                     fog.parentNode.removeChild(fog);
                     if (checkTile(n+2,m+2,"faction") == "alien"){
                         //Show an enemy at a specified location.
-                        enemy = document.querySelector("#alien" + (checkTile(n+2,m+2,index)+1).toString());
+                        enemy = document.querySelector("#alien" + ((checkTile(n+2,m+2,"index"))+1).toString());
                         enemy.setAttribute("visible", "true");
                     }
                 }
