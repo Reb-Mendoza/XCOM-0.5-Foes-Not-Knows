@@ -404,7 +404,8 @@ function move(x,y,direction) {
         unit.object3D.rotation.y = THREE.Math.degToRad(270);
     }
     updateFog();
-    selectUnit(newX,newY);
+    selected.X = newX;
+    selected.Y = newY;
 }
 //Check whether or not a shot that has been fired hits. Output: Boolean
 function toHit(x,y,targetX,targetY,weapon) {
