@@ -60,6 +60,7 @@ function startGame(map) {
     //Adjust the camera.
     var cameraEl = document.querySelector("#gameCamera");
     cameraEl.setAttribute("position", {x: (cameraPosition[0]), y: (cameraPosition[1]), z: (cameraPosition[2])});
+    cameraEl.setAttribute("rotation", {x: 270, y: 180, z: 0});
     
     //Disable the start button.
     var startButton = document.querySelector("#hudBox");
