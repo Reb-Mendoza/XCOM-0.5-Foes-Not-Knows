@@ -125,7 +125,7 @@ function checkTile(x,y,type) {
         var checkY = (operator.Y[j]);
         if (checkX == x && checkY == y) {
             faction = "operator";
-            index = j;
+            index = i;
         }
     }
     for (i=0; i < alien.X.length; i++) {
@@ -133,7 +133,7 @@ function checkTile(x,y,type) {
         var checkY = (alien.Y[j]);
         if (checkX == x && checkY == y) {
             faction = "alien";
-            index = j;
+            index = i;
         }
     }
     if (type == "faction") {
