@@ -149,14 +149,14 @@ function checkTile(x,y,type) {
 //Returns whether or not there is a wall on a tile, given a position and a direction. Output: Boolean
 function checkIfWall(x,y,direction) {
     if (direction == "vertical") {
-        for (k=0; k < wall.vertical.X; k++) {
+        for (k=0; k < wall.vertical.X.length; k++) {
             if ((wall.vertical.X[k] == x) && (wall.vertical.Y[k] == y)) {
                 return true;
             }
         }
         return false;
     } else if (direction == "horizontal") {
-        for (k=0; k < wall.horizontal.X; k++) {
+        for (k=0; k < wall.horizontal.X.length; k++) {
             if ((wall.horizontal.X[k] == x) && (wall.horizontal.Y[k] == y)) {
                 return true;
             }
