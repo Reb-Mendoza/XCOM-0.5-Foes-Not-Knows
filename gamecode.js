@@ -1,8 +1,8 @@
 let step = 0;
 let selected = {X: 0, Y: 0};
 let targeted = {X: 0, Y: 0};
-let operator = {ID: [1], Action: [2,2,2], SightRange: [], MaxAmmo: [], Ammo: [], MaxMoves: [3,3,3], Moves: [3,3,3], MaxHP: [4,4,4], HP: [4,4,4], X: [], Y: []};
-let alien = {ID: [], Action: [], SightRange: [], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
+let operator = {ID: [1], Action: [2,2,2], SightRange: [5,5,5], MaxAmmo: [], Ammo: [], MaxMoves: [3,3,3], Moves: [3,3,3], MaxHP: [4,4,4], HP: [4,4,4], X: [], Y: []};
+let alien = {ID: [], Action: [], SightRange: [5,5,5], MaxMoves: [], Moves: [], MaxHP: [], HP: [], X: [], Y: []};
 let buttonsPressable = 0;
 let controlMode = 0;
 //Vertical walls are described by the coordinate to the left of the wall. Horizontal walls are described by the coordinate below the wall.
@@ -279,21 +279,19 @@ function canSee(x,y,targetX,targetY,range) {
 //Call this function to update the Fog of War.
 function updateFog() {
     //Fog all tiles.
-    var sceneEl = document.querySelector("a-scene");
-    var fog;
     for (m=0; m < mapSize.Y; m++) {
         for (n=0; n < mapSize.X; n++) {
+            var sceneEl = document.querySelector("a-scene");
             var fog = document.createElement("a-entity");
             sceneEl.appendChild(fog);
             fog.setAttribute("mixin", "fogOfWar");
-            fog.setAttribute("position", {x: n*-2, y: -4, z: m*2});
+            fog.setAttribute("position", {x: (n*-2)+3, y: -4, z: (m*2)-3});
             fog.setAttribute("id", ("fog" + n.toString() + m.toString()));
         }
     }
     //Hide all enemies.
-    var enemy;
     for (a=0; a < alien.X.length; a++) {
-        enemy = document.querySelector("#alien" + (a+1).toString());
+        var enemy = document.querySelector("#alien" + (a+1).toString());
         enemy.setAttribute("visible", "false");
     }
     for (l=0; l < operator.X.length; l++) {
