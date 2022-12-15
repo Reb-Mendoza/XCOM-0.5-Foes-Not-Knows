@@ -205,7 +205,6 @@ function canSee(x,y,targetX,targetY,range) {
         } else if ((x == targetX) || (y == targetY)) {
             if (x == targetX) {
                 if (y < targetY) {
-                    console.log("for")
                     for (i=0; i < dist(y,targetY); i++) {
                         if (checkIfWall(x,y+j,"horizontal")) {
                             return false;
@@ -239,35 +238,29 @@ function canSee(x,y,targetX,targetY,range) {
             }
         //Skewed shot case.
         } else {
-            var verticalVar = 0;
-            var horizontalVar = 0;
             var index = 0;
-            if (x > targetX) {
-                verticalVar = -1;
-            }
-            if (y > targetY) {
-                horizontalVar = -1;
-            }
             if (dist(x,targetX) == 1) {
+                console.log("skew: up/down");
                 for (j=1; j < dist(y,targetY); j++) {
                     if (y > targetY) {
-                        index = j * -1;
+                        var index = j * -1;
                     } else {
-                        index = j;
+                        var index = j;
                     }
-                    if ((canSee(x,y,x,targetY-index,(targetY-index-y)) == true) && ((checkIfWall((x+verticalVar),(targetY-index),"vertical")) == false) && (canSee((x+((verticalVar*2)+1)),(targetY-index),targetX,targetY,(index)))) {
+                    if ((canSee(x,y,x,targetY-index,100) == true) && (canSee(x,targetY-index,targetX,targetY-index,100) == true) && (canSee(targetX,targetY-index,targetX,targetY,100))) {
                         return true;
                     }
                 }
                 return false;
             } else if (dist(y,targetY) == 1) {
+                console.log("skew: left/right");
                 for (j=1; j < dist(x,targetX); j++) {
                     if (x > targetX) {
                         index = j * -1;
                     } else {
                         index = j;
                     }
-                    if ((canSee(x,y,targetX-index,y,(targetX-index-x)) == true) && ((checkIfWall((targetX-index),(y+horizontalVar),"horizontal")) == false) && (canSee((targetX-index),(y+((horizontalVar*2)+1)),targetX,targetY,(index)))) {
+                    if ((canSee(x,y,targetX-index,y,100) == true) && (canSee(targetX-index,y,targetX-index,targetY,100) == true) && (canSee(targetX-index,targetY,targetX,targetY,100) == true)) {
                         return true;
                     }
                 }
@@ -298,7 +291,6 @@ function updateFog() {
         var enemy = document.querySelector("#alien" + (a+1).toString());
         enemy.setAttribute("visible", "false");
     }
-
     for (l=0; l < operator.X.length; l++) {
         var checkX = (operator.X[l]);
         var checkY = (operator.Y[l]);
