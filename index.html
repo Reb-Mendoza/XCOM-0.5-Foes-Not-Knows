@@ -20,12 +20,14 @@
         <a-asset-item id="soldierRunningModel" src="3D Models/soldier_ue4_rig/scene.gltf"></a-asset-item>
         <a-asset-item id="soldierShootingModel" src="3D Models/russian_soldier/scene.gltf"></a-asset-item>
         <a-asset-item id="soldierSalutingModel" src="3D Models/soldier_blender_rigged/scene.gltf"></a-asset-item>
+        <a-asset-item id="alienIdleModel" src="3D Models/grey_alien_idle/scene.gltf"></a-asset-item>
 
         <a-mixin id="abilityButton" ability-button geometry="primitive: plane; width: 0.01; height: 0.01" color="black" rotation="0 0 0" visible="false"></a-mixin>
         <a-mixin id="hardWall" geometry="primitive: box; width: 0.1; height: 3; depth: 2.1" position="y: -4.5" material="src: #hardWallTexture"></a-mixin>
         <a-mixin id="fogOfWar" geometry="primitive: box; width: 2; height: 3; depth: 2" position="y: -4.5" material="color: black"></a-mixin>
         <a-mixin id="selectionCircle" geometry="primitive: circle; radius: 0.7" position="y: -1.6" rotation="x: -90" animation material="color: white"></a-mixin>
         <a-mixin id="operator" gltf-model="#soldierShootingModel" unit position="0 -4.3 0" animation></a-mixin>
+        <a-mixin id="alien" gltf-model="#alienIdleModel" unit position="0 -4.3 0"></a-mixin>
       </a-assets>
 
       <a-camera id="gameCamera" position="0 -4 0" look-controls="enabled: false">

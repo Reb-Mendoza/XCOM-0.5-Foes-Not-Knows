@@ -57,7 +57,15 @@ function startGame(map) {
         entityEl.setAttribute("id", "operator" + (i+1).toString());
     }
     //Aliens.
-
+    for (i=0; i < alien.X.length; i++) {
+        var sceneEl = document.querySelector("a-scene");
+        var entityEl = document.createElement("a-entity");
+        sceneEl.appendChild(entityEl);
+        entityEl.setAttribute("mixin", "alien");
+        entityEl.setAttribute("position", {x: (operator.X[i] * -2)+3, y: -4.5, z: (operator.Y[i] * 2)-3});
+        entityEl.setAttribute("unit", "number", (i+1));
+        entityEl.setAttribute("id", "alien" + (i+1).toString());
+    }
     //Adjust the camera.
     var cameraEl = document.querySelector("#gameCamera");
     cameraEl.setAttribute("position", {x: (cameraPosition[0]), y: (cameraPosition[1]), z: (cameraPosition[2])});
