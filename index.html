@@ -28,7 +28,7 @@
         <a-mixin id="operator" gltf-model="#soldierShootingModel" unit position="0 -4.3 0" animation></a-mixin>
       </a-assets>
 
-      <a-camera id="gameCamera">
+      <a-camera id="gameCamera" position="0 -4 0" look-controls="enabled: false">
         <a-entity cursor="rayOrigin: mouse"></a-entity>
         <a-plane id="hudBox" color="#1ce9d1" opacity="0.5" height= "0.05" width = "0.15" position="0 -0.07 -0.12" rotation="0 0 0" start-button>
           <a-text id="hudText" color="white" height= "0.05" width = "0.14" position="-0.07 0.005 0" rotation="0 0 0" anchor="left" baseline="top" wrap-count="65" font="exo2semibold" value="Click this box to start the game!"></a-text>
