@@ -180,21 +180,13 @@ function canSee(x,y,targetX,targetY,range) {
     if (canHit(x,y,targetX,targetY,range) == true) {
         //Corner case.
         if ((dist(x,targetX) == 1) && (dist(y,targetY) == 1)) {
-            let verticalCheck = true;
-            let horizontalCheck = true;
-            let verticalVar = 0;
-            let horizontalVar = 0;
-            if (x > targetX) {
-                verticalVar = -1;
+            let verticalCheck = false;
+            let horizontalCheck = false;
+            if ((canSee(x,y,x,targetY,1) == true) && (canSee(x,targetY,targetX,targetY,1) == true)) {
+                verticalCheck = true;
             }
-            if (y > targetY) {
-                horizontalVar = -1;
-            }
-            if ((checkIfWall((x+verticalVar),(y+((horizontalVar*2)+1)),"vertical")) == true) {
-                verticalCheck = false;
-            }
-            if ((checkIfWall((x+((verticalVar*2)+1)),(y+horizontalVar),"horizontal")) == true) {
-                horizontalCheck = false;
+            if ((canSee(x,y,targetX,y,1) == true) && (canSee(targetX,y,targetX,targetY,1) == true)) {
+                horizontalCheck = true;
             }
             if ((horizontalCheck == false) && (verticalCheck == false)) {
                 return false;
@@ -475,8 +467,6 @@ function targetUnit(x,y) {
 function action(buttonNumber) {
     console.log("action" + buttonNumber);
     hideButtons();
-    var camera = document.querySelector("#gameCamera");
-    camera.setAttribute("wasd-controls", "enabled", "false");
     //Movement
     if (buttonNumber == 1) {
         controlMode = 1;
@@ -506,6 +496,8 @@ function action(buttonNumber) {
 //Show HUD buttons. Based on which operator you've selected.
 function showButtons() {
     console.log("buttons shown");
+    var camera = document.querySelector("#gameCamera");
+    camera.setAttribute("wasd-controls", "enabled", "true");
     text("1 - Move your unit.\n2- Attempt to shoot a target. (This has not been implemented yet, just move your damn unit.)")
     buttonsPressable = 1;
     for (i=0; i<6; i++) {
@@ -516,6 +508,8 @@ function showButtons() {
 //Hide HUD buttons.
 function hideButtons() {
     console.log("buttons hidden");
+    var camera = document.querySelector("#gameCamera");
+    camera.setAttribute("wasd-controls", "enabled", "false");
     buttonsPressable = 0;
     for (i=0; i<6; i++) {
         var entity = document.querySelector("#button" + (i+1));
