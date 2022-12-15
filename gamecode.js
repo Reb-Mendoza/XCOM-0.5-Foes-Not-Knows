@@ -121,23 +121,19 @@ function checkTile(x,y,type) {
     var faction = "none";
     var index
     for (i=0; i < operator.X.length; i++) {
-        checkX = (operator.X[i]);
-        for (j=0; j < operator.Y.length; j++) {
-            checkY = (operator.Y[j]);
-            if (checkX == x && checkY == y) {
-                faction = "operator";
-                index = j;
-            }
+        var checkX = (operator.X[i]);
+        var checkY = (operator.Y[j]);
+        if (checkX == x && checkY == y) {
+            faction = "operator";
+            index = j;
         }
     }
     for (i=0; i < alien.X.length; i++) {
-        checkX = (alien.X[i]);
-        for (j=0; j < alien.Y.length; j++) {
-            checkY = (alien.Y[j]);
-            if (checkX == x && checkY == y) {
-                faction = "operator";
-                index = j;
-            }
+        var checkX = (alien.X[i]);
+        var checkY = (alien.Y[j]);
+        if (checkX == x && checkY == y) {
+            faction = "alien";
+            index = j;
         }
     }
     if (type == "faction") {
