@@ -437,7 +437,8 @@ function selectUnit(x,y) {
     var entityEl = document.createElement("a-entity");
     unit.appendChild(entityEl);
     entityEl.setAttribute("mixin", "selectionCircle");
-    entityEl.setAttribute("position", {x: 0, y: -1.4 , z: 0})
+    entityEl.setAttribute("position", {x: 0, y: -1.4 , z: 0});
+    entityEl.setAttribute("id", "selectionCircle");
     selected.X = x
     selected.Y = y
     if (checkTile(x,y,"faction") == "operator") {
@@ -589,6 +590,8 @@ AFRAME.registerComponent("controls", {
             if (controlMode != 0) {
                 controlMode = 0;
                 showButtons();
+            } else {
+                deselectUnit();
             }
         });
         this.el.addEventListener("keydown:Space", function() {
