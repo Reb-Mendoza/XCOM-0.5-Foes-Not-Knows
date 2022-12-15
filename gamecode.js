@@ -20,8 +20,8 @@ function startGame(map) {
         wall.horizontal.Y = [11,11,11,11,11,11,11,11,11,11,10,10,8,8,7,7,7,7,7,7,5,5,5,5,4,4,4,4,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1];
         mapSize.X = 10;
         mapSize.Y = 10;
-        operator.X = [10,9,11];
-        operator.Y = [11,9,8];
+        operator.X = [10];
+        operator.Y = [11];
         alien.X = [4,4,8,4,7,9];
         alien.Y = [11,7,7,3,4,3];
         alien.ID = [1,1,1,1,1,1];
@@ -356,6 +356,8 @@ function heal(x,y,amount) {
 }
 //Move a unit one space in a given direction.
 function move(x,y,direction) {
+    var newX = x;
+    var newY = y;
     var faction = checkTile(x,y,"faction");
     var index = checkTile(x,y,"index") + 1;
     var unit;
@@ -371,6 +373,7 @@ function move(x,y,direction) {
             alien.Y[index] = alien.Y[index] + 1;
         }
         unit.object3D.position.z += 2;
+        newY++
         unit.object3D.rotation.y = THREE.Math.degToRad(0);
     } else if ((direction == "down") && !(checkIfWall(x,y-1,"horizontal")) && (checkTile(x,y-1,"faction") == "none")) {
         if (faction == "operator") {
@@ -379,6 +382,7 @@ function move(x,y,direction) {
             alien.Y[index] = alien.Y[index] - 1;
         }
         unit.object3D.position.z += -2;
+        newY--
         unit.object3D.rotation.y = THREE.Math.degToRad(180);
     } else if ((direction == "left") && !(checkIfWall(x-1,y,"vertical")) && (checkTile(x-1,y,"faction") == "none")) {
         if (faction == "operator") {
@@ -387,6 +391,7 @@ function move(x,y,direction) {
             alien.X[index] = alien.X[index] - 1;
         }
         unit.object3D.position.x += 2;
+        newX--
         unit.object3D.rotation.y = THREE.Math.degToRad(90);
     } else if ((direction == "right") && !(checkIfWall(x,y,"vertical")) && (checkTile(x+1,y,"faction") == "none")) {
         if (faction == "operator") {
@@ -395,10 +400,11 @@ function move(x,y,direction) {
             alien.X[index] = alien.X[index] + 1;
         }
         unit.object3D.position.x += -2;
+        newX++
         unit.object3D.rotation.y = THREE.Math.degToRad(270);
     }
     updateFog();
-    selectUnit(x,y);
+    selectUnit(newX,newY);
 }
 //Check whether or not a shot that has been fired hits. Output: Boolean
 function toHit(x,y,targetX,targetY,weapon) {
