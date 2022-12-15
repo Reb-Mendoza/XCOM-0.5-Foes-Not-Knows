@@ -296,19 +296,23 @@ function updateFog() {
         var enemy = document.querySelector("#alien" + (a+1).toString());
         enemy.setAttribute("visible", "false");
     }
+
     for (l=0; l < operator.X.length; l++) {
         var checkX = (operator.X[l]);
         var checkY = (operator.Y[l]);
         var range = operator.SightRange[l];
+        console.log('l')
         for (m=0; m < mapSize.Y; m++) {
             for (n=0; n < mapSize.X; n++) {
-                if ((canSee(checkX,checkY,n+1,m+1,range) == true) && (checkTile(n+1,m+1,"faction") == "alien")) {
+                if ((canSee(checkX,checkY,n+1,m+1,range) == true)) {
                     //Remove fog at the specified location.
                     fog = document.querySelector("#fog" + n.toString() + m.toString());
                     fog.parentNode.removeChild(fog);
-                    //Show an enemy at a specified location.
-                    enemy = document.querySelector("#alien" + (checkTile(n+1,m+1,index)+1).toString());
-                    enemy.setAttribute("visible", "true");
+                    if (checkTile(n+1,m+1,"faction") == "alien"){
+                        //Show an enemy at a specified location.
+                        enemy = document.querySelector("#alien" + (checkTile(n+1,m+1,index)+1).toString());
+                        enemy.setAttribute("visible", "true");
+                    }
                 }
             }
         }
