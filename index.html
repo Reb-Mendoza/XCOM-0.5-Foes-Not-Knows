@@ -14,6 +14,8 @@
         <img id="devSkyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
         <img id="hardWallTexture" src="Textures/walls/IMGP1648.JPG">
         <img id="floorTexture" src="Textures/textile/carpet.jpg">
+        <img id="moveIcon" src="Icons/Movement.webp">
+        <img id="shootIcon" src="Icons/Shoot.webp">
 
         <a-asset-item id="soldierRunningModel" src="3D Models/soldier_ue4_rig/scene.gltf"></a-asset-item>
         <a-asset-item id="soldierShootingModel" src="3D Models/russian_soldier/scene.gltf"></a-asset-item>
@@ -31,8 +33,8 @@
         <a-plane id="hudBox" color="#1ce9d1" opacity="0.5" height= "0.05" width = "0.15" position="0 -0.07 -0.12" rotation="0 0 0">
           <a-text id="hudText" color="white" height= "0.05" width = "0.14" position="-0.07 0.005 0" rotation="0 0 0" anchor="left" baseline="top" wrap-count="65" font="exo2semibold" value="Hold Angle [Short Action] :: Character enters a state in which they will fire at the next enemy that comes into line of sight."></a-text>
         </a-plane>
-        <a-plane id="button1" mixin="abilityButton" position="-0.065 -0.055 -0.119" ability-button="number: 1"></a-plane>
-        <a-plane id="button2" mixin="abilityButton" position="-0.050 -0.055 -0.119" ability-button="number: 2"></a-plane>
+        <a-plane id="button1" mixin="abilityButton" material="src: #moveIcon" position="-0.065 -0.055 -0.119" ability-button="number: 1"></a-plane>
+        <a-plane id="button2" mixin="abilityButton" material="src: #shootIcon" position="-0.050 -0.055 -0.119" ability-button="number: 2"></a-plane>
         <a-plane id="button3" mixin="abilityButton" position="-0.035 -0.055 -0.119" ability-button="number: 3"></a-plane>
         <a-plane id="button4" mixin="abilityButton" position="-0.020 -0.055 -0.119" ability-button="number: 4"></a-plane>
         <a-plane id="button5" mixin="abilityButton" position="-0.005 -0.055 -0.119" ability-button="number: 5"></a-plane>
