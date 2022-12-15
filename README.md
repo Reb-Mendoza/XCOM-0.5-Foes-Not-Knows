@@ -64,7 +64,8 @@
 3. It's time to make something out of what I've created; it will be very different from what I originally thought.
 
 #### 12/15/22
-
+1. There is no more time to introduce voilence to the game, it is now a hide and seek simulator. Awesome.
+2. I had fun anyways, and I will 100% be working on this project on and off for years; I mean if I've been thinking about it for years, why not work on it for years?
 
 
 
