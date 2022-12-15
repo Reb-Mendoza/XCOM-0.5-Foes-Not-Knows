@@ -26,8 +26,8 @@
         <a-mixin id="hardWall" geometry="primitive: box; width: 0.1; height: 3; depth: 2.1" position="y: -4.5" material="src: #hardWallTexture"></a-mixin>
         <a-mixin id="fogOfWar" geometry="primitive: box; width: 2; height: 3; depth: 2" position="y: -4.5" material="color: black"></a-mixin>
         <a-mixin id="selectionCircle" geometry="primitive: circle; radius: 0.7" position="y: -1.6" rotation="x: -90" animation material="color: white"></a-mixin>
-        <a-mixin id="operator" unit gltf-model="#soldierRunningModel" position="0 -4.3 0" animation-mixer="clip: root|run_front"></a-mixin>
-        <a-mixin id="alien" unit gltf-model="#alienIdleModel" position="0 -4.3 0"></a-mixin>
+        <a-mixin id="operator" gltf-model="#soldierRunningModel" position="0 -4.3 0" animation-mixer="clip: root|run_front" unit></a-mixin>
+        <a-mixin id="alien" gltf-model="#alienIdleModel" position="0 -4.3 0" unit></a-mixin>
       </a-assets>
 
       <a-camera id="gameCamera" position="0 -4 0" look-controls="enabled: false">
