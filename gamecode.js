@@ -54,6 +54,7 @@ function startGame(map) {
         entityEl.setAttribute("unit", "number", (i+1));
     }
 }
+startGame("office");
 //Call this function between each turn step. It checks for effects that happen outside of the player's control.
 function turnStep(step) {
 
