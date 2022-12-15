@@ -11,7 +11,7 @@ let mapSize = {X: 0, Y: 0};
 
 //Starts the game on a selected map.
 function startGame(map) {
-    if (map == "Office") {
+    if (map == "office") {
         //ROM for the game's maps.
         wall.vertical.X = [1,4,11,1,4,5,7,11,1,4,7,11,1,5,7,11,1,2,4,5,8,10,11,1,4,5,10,11,1,2,3,8,10,11,1,4,7,11,1,4,10,11,1,4,7,11];
         wall.vertical.Y = [11,11,11,10,10,10,10,10,9,9,9,9,8,8,8,8,7,7,7,7,7,7,7,6,6,6,6,6,5,5,5,5,5,5,4,4,4,4,3,3,3,3,2,2,2,2];
@@ -25,7 +25,6 @@ function startGame(map) {
         alien.Y = [11,7,7,3,4,3];
         alien.ID = [1,1,1,1,1,1];
     }
-
     //Now place elements where they belong.
     //Vertical Walls.
     var sceneEl = document.querySelector("a-scene");
@@ -51,6 +50,7 @@ function startGame(map) {
         entityEl.setAttribute("unit", "number", (i+1));
     }
 }
+startGame("office");
 //Call this function between each turn step. It checks for effects that happen outside of the player's control.
 function turnStep(step) {
 
