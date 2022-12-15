@@ -6,7 +6,7 @@ let alien = {ID: [], Action: [], SightRange: [5,5,5], MaxMoves: [], Moves: [], M
 let buttonsPressable = 0;
 let controlMode = 0;
 //Vertical walls are described by the coordinate to the left of the wall. Horizontal walls are described by the coordinate below the wall.
-let wall = {vertical: {X: [4], Y:[3]}, horizontal: {X: [], Y:[]}};
+let wall = {vertical: {X: [], Y:[]}, horizontal: {X: [], Y:[]}};
 let mapSize = {X: 0, Y: 0};
 
 //Starts the game on a selected map.
@@ -474,11 +474,12 @@ function targetUnit(x,y) {
 //Check what action is tied to which button in the HUD, then call that action to be performed.
 function action(buttonNumber) {
     console.log("action" + buttonNumber);
+    hideButtons();
+    var camera = document.querySelector("#gameCamera");
+    camera.setAttribute("wasd-controls", "enabled", "false");
     //Movement
     if (buttonNumber == 1) {
         controlMode = 1;
-        var camera = document.querySelector("#gameCamera");
-        camera.setAttribute("wasd-controls", "enabled", "false");
         text("WASD - Operator moves one tile in that dierection, if possible.\nEsc - Cancel movement.");
     //Fire Weapon
     } else if (buttonNumber == 2) {
@@ -505,6 +506,7 @@ function action(buttonNumber) {
 //Show HUD buttons. Based on which operator you've selected.
 function showButtons() {
     console.log("buttons shown");
+    text("1 - Move your unit.\n2- Attempt to shoot a target. (This has not been implemented yet, just move your damn unit.)")
     buttonsPressable = 1;
     for (i=0; i<6; i++) {
         var entity = document.querySelector("#button" + (i+1));
