@@ -50,7 +50,7 @@ function startGame(map) {
         var entityEl = document.createElement("a-entity");
         sceneEl.appendChild(entityEl);
         entityEl.setAttribute("mixin", "operator");
-        entityEl.setAttribute("position", {x: (operator.X[i] * -2), y: -4.5, z: (operator.Y[i] * 2)});
+        entityEl.setAttribute("position", {x: (operator.X[i] * -2)+2, y: -4.5, z: (operator.Y[i] * 2)-2});
         entityEl.setAttribute("unit", "number", (i+1));
     }
 }
@@ -605,4 +605,11 @@ AFRAME.registerComponent("unit", {
     }
 });
 
-startGame("office");
+AFRAME.registerComponent("start-button", {
+    init: function () {
+        this.el.addEventListener("click", function() {
+            startGame("office");
+            this.el.removeAttribute("start-button");
+        });
+    }
+});
