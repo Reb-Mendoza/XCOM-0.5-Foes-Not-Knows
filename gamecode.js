@@ -577,6 +577,7 @@ AFRAME.registerComponent("controls", {
             }
         });
         this.el.addEventListener("keydown:Space", function() {
+            selectUnit(10,11);
             if ((controlMode == 2) && (targeted.X != 0) && (targeted.Y != 0) && toHit(selected.X,selected.Y,targeted.X,targeted.Y,1)) {
                 damage(targeted.X,targeted.Y,5);
             }
