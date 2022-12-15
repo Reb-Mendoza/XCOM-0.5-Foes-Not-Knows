@@ -198,6 +198,8 @@ function canSee(x,y,targetX,targetY,range) {
             }
             if ((horizontalCheck == false) && (verticalCheck == false)) {
                 return false;
+            } else {
+                return true;
             }
         //Straight line case.
         } else if ((x == targetX) || (y == targetY)) {
