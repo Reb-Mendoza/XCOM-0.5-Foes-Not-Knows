@@ -160,7 +160,7 @@ function checkIfWall(x,y,direction) {
             if ((wall.horizontal.X[k] == x) && (wall.horizontal.Y[k] == y)) {
                 return true;
             }
-z       }
+        }
         return false;
     }
 }
