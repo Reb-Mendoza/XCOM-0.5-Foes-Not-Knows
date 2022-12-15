@@ -62,7 +62,7 @@ function startGame(map) {
         var entityEl = document.createElement("a-entity");
         sceneEl.appendChild(entityEl);
         entityEl.setAttribute("mixin", "alien");
-        entityEl.setAttribute("position", {x: (operator.X[i] * -2)+3, y: -4.5, z: (operator.Y[i] * 2)-3});
+        entityEl.setAttribute("position", {x: (alien.X[i] * -2)+3, y: -4.5, z: (alien.Y[i] * 2)-3});
         entityEl.setAttribute("unit", "number", (i+1));
         entityEl.setAttribute("id", "alien" + (i+1).toString());
     }
@@ -74,6 +74,8 @@ function startGame(map) {
     //Disable the start button.
     var startButton = document.querySelector("#hudBox");
     startButton.removeAttribute("start-button");
+    updateFog();
+    text("Your goal is to find and eliminate all aliens in the area. Be sure to put on your angry face. >:(")
 }
 
 //Call this function between each turn step. It checks for effects that happen outside of the player's control.
@@ -285,7 +287,7 @@ function updateFog() {
             sceneEl.appendChild(fog);
             fog.setAttribute("mixin", "fogOfWar");
             fog.setAttribute("position", {x: n*-2, y: -4, z: m*2});
-            fog.setAttribute("id", ("fog" + n + m));
+            fog.setAttribute("id", ("fog" + n.toString() + m.toString()));
         }
     }
     //Hide all enemies.
@@ -302,7 +304,7 @@ function updateFog() {
             for (n=0; n < mapSize.X; n++) {
                 if ((canSee(checkX,checkY,n+1,m+1,range) == true) && (checkTile(n+1,m+1,"faction") == "alien")) {
                     //Remove fog at the specified location.
-                    fog = document.querySelector("fog" + n + m);
+                    fog = document.querySelector("#fog" + n.toString() + m.toString());
                     fog.parentNode.removeChild(fog);
                     //Show an enemy at a specified location.
                     enemy = document.querySelector("#alien" + (checkTile(n+1,m+1,index)+1).toString());
